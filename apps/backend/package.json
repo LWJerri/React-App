@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "pnpm prisma generate",
     "build": "nest build",
     "prestart": "pnpm prisma migrate deploy",
     "start": "node dist/main",
