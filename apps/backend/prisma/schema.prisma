@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  CRITICAL
+}
+
+enum Action {
+  CREATE
+  EDIT
+  DELETE
+}
+
+model List {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+  task      Task[]
+
+  @@map("lists")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  dueAt       DateTime @map("due_at")
+  priority    Priority
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+  listId      String   @map("list_id")
+  list        List     @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  @@map("tasks")
+}
+
+model AuditLog {
+  id            String   @id @default(cuid())
+  action        Action
+  relatedId     String   @map("related_id")
+  affectedField String   @map("affected_field")
+  newState      String?  @map("new_state")
+  oldState      String?  @map("old_state")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("audit_logs")
+}
