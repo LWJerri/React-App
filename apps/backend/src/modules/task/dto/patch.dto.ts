@@ -9,5 +9,5 @@ export class PatchTaskDto extends PartialType(CreateTaskDto) {
   })
   @IsOptional()
   @IsString()
-  readonly newListId: string;
+  readonly listId: string;
 }

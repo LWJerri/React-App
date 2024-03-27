@@ -9,8 +9,8 @@ export class PatchTaskGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const { body, params } = context.switchToHttp().getRequest<Request>();
 
-    if (body.newListId) {
-      const isListExists = await this.prismaService.list.findUnique({ where: { id: String(body.newListId) } });
+    if (body.listId) {
+      const isListExists = await this.prismaService.list.findUnique({ where: { id: String(body.listId) } });
 
       if (!isListExists) throw new NotFoundException("No list with this Id was found.");
     }

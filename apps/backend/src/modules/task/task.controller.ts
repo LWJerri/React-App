@@ -13,8 +13,7 @@ import { AuditEntity } from "../audit/entities/audit.entity";
 import { CreateTaskDto } from "./dto/create.dto";
 import { PatchTaskDto } from "./dto/patch.dto";
 import { GetEntity } from "./entities/get.entity";
-import { DeleteTaskGuard } from "./guards/delete.guard";
-import { HistoryTaskGuard } from "./guards/history.guard";
+import { GetTaskGuard } from "./guards/get.guard";
 import { PatchTaskGuard } from "./guards/patch.guard";
 import { TaskGuard } from "./guards/task.guard";
 import { TaskService } from "./task.service";
@@ -42,7 +41,7 @@ export class TaskController {
     return this.taskService.getTasks(listId);
   }
 
-  @Get(":id/history")
+  @Get(":id/audit")
   @ApiOperation({
     summary: "History of changes",
     tags: ["Tasks Endpoints"],
@@ -56,9 +55,9 @@ export class TaskController {
     example: "clu1qbwq6000608l016lme5b0 ",
     description: "Specify the Id of the task for which you want to retrieve the history.",
   })
-  @UseGuards(HistoryTaskGuard)
-  getHistory(@Param("id") id: string) {
-    return this.taskService.getHistory(id);
+  @UseGuards(GetTaskGuard)
+  getAudit(@Param("id") id: string) {
+    return this.taskService.getAudit(id);
   }
 
   @Get(":id")
@@ -75,6 +74,7 @@ export class TaskController {
     example: "clu1qdgea000708l097xq1jb9 ",
     description: "Specify the Id of the task for which you want to retrieve the history.",
   })
+  @UseGuards(GetTaskGuard)
   getTask(@Param("id") id: string) {
     return this.taskService.getTask(id);
   }
@@ -132,7 +132,7 @@ export class TaskController {
     example: "clu1qiv97000a08l0e1185dzw ",
     description: "Specify the Id of the task to be deleted.",
   })
-  @UseGuards(DeleteTaskGuard)
+  @UseGuards(GetTaskGuard)
   deleteTask(@Param("id") id: string) {
     return this.taskService.deleteTask(id);
   }

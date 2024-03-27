@@ -3,15 +3,13 @@ import { Request } from "express";
 import { PrismaService } from "../../prisma/prisma.service";
 
 @Injectable()
-export class HistoryTaskGuard implements CanActivate {
+export class GetTaskGuard implements CanActivate {
   constructor(private readonly prismaService: PrismaService) {}
 
   async canActivate(context: ExecutionContext) {
     const { params } = context.switchToHttp().getRequest<Request>();
 
-    const { listId, id } = params;
-
-    const isTaskExists = await this.prismaService.task.findUnique({ where: { id, listId } });
+    const isTaskExists = await this.prismaService.task.findUnique({ where: { id: params.id } });
 
     if (!isTaskExists) throw new NotFoundException("No task with this Id was found.");
 

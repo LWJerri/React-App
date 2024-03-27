@@ -15,13 +15,13 @@ export class TaskService {
     return tasks;
   }
 
-  async getHistory(id: string) {
-    const taskHistory = await this.prismaService.auditLog.findMany({
+  async getAudit(id: string) {
+    const audit = await this.prismaService.auditLog.findMany({
       where: { relatedId: id },
       orderBy: { createdAt: "desc" },
     });
 
-    return taskHistory;
+    return audit;
   }
 
   async getTask(id: string) {
@@ -31,9 +31,7 @@ export class TaskService {
   }
 
   async createTask(body: CreateTaskDto, listId: string) {
-    const task = await this.prismaService.task.create({
-      data: { ...body, listId },
-    });
+    const task = await this.prismaService.task.create({ data: { ...body, listId } });
 
     await this.prismaService.auditLog.create({
       data: { action: "CREATE", affectedField: "name", relatedId: task.id, newState: task.name },
@@ -43,25 +41,25 @@ export class TaskService {
   }
 
   async patchTask(body: PatchTaskDto, id: string) {
-    const { newListId, ...fields } = body;
-
     const prepOldTask = await this.prismaService.task.findUnique({ where: { id } });
     const oldTask = prepOldTask!;
 
-    const task = await this.prismaService.task.update({ where: { id }, data: { listId: newListId, ...fields } });
+    const task = await this.prismaService.task.update({
+      where: { id },
+      data: { ...body, updatedAt: new Date() },
+    });
 
-    const newChanges = updatedDiff(oldTask, task);
+    const filterKey: keyof Task = "updatedAt";
+
+    const prepNewChanges = updatedDiff(oldTask, task);
+    const newChanges = Object.keys(prepNewChanges).filter((key) => key !== filterKey);
 
     const auditLogData = Object.keys(newChanges).map((key) => {
       const affectedField = key as keyof Task;
+      const newState = String(task[affectedField]);
+      const oldState = String(oldTask[affectedField]);
 
-      return {
-        action: Action.EDIT,
-        affectedField,
-        relatedId: task.id,
-        newState: String(task[affectedField]),
-        oldState: String(oldTask[affectedField]),
-      };
+      return { action: Action.EDIT, affectedField, relatedId: task.id, newState, oldState };
     });
 
     await this.prismaService.auditLog.createMany({ data: auditLogData });
