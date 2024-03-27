@@ -5,8 +5,8 @@ export class NestResponse {
   statusCode: number;
 
   @ApiProperty({
-    example: "Cannot GET /",
-    description: "Detailed description of the error. This field can be as <b>string</b> or <b>array of strings</b>.",
+    description: "Detailed description of the error. This field can be <b>string</b> or <b>array of strings</b>.",
+    oneOf: [{ type: "string" }, { type: "array", items: { type: "string" } }],
   })
   message: string | string[];
 
