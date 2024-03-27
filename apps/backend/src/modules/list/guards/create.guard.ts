@@ -10,7 +10,7 @@ export class CreateListGuard implements CanActivate {
     const { body } = context.switchToHttp().getRequest<Request>();
 
     const isListAlreadyCreated = await this.prismaService.list.findFirst({
-      where: { name: { mode: "insensitive", contains: body.name } },
+      where: { name: { mode: "insensitive", contains: String(body.name) } },
     });
 
     if (isListAlreadyCreated && body.name) throw new BadRequestException("A list by that name already exists.");
