@@ -38,20 +38,19 @@ export class ListService {
     const prepOldList = await this.prismaService.list.findUnique({ where: { id } });
     const oldList = prepOldList!;
 
-    const list = await this.prismaService.list.update({ where: { id }, data: { ...body } });
+    const list = await this.prismaService.list.update({ where: { id }, data: { ...body, updatedAt: new Date() } });
 
-    const newChanges = updatedDiff(oldList, list);
+    const filterKey: keyof List = "updatedAt";
+
+    const prepNewChanges = updatedDiff(oldList, list);
+    const newChanges = Object.keys(prepNewChanges).filter((key) => key !== filterKey);
 
     const auditLogData = Object.keys(newChanges).map((key) => {
       const affectedField = key as keyof List;
+      const newState = String(list[affectedField]);
+      const oldState = String(oldList[affectedField]);
 
-      return {
-        action: Action.EDIT,
-        affectedField,
-        relatedId: list.id,
-        newState: String(list[affectedField]),
-        oldState: String(oldList[affectedField]),
-      };
+      return { action: Action.EDIT, affectedField, relatedId: list.id, newState, oldState };
     });
 
     await this.prismaService.auditLog.createMany({ data: auditLogData });
