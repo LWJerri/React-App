@@ -18,7 +18,7 @@ export class AuditController {
   @ApiOkResponse({ type: AuditEntity, isArray: true, description: responses.success })
   @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
   @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
-  getAuditHistory() {
-    return this.auditService.getAuditHistory();
+  getAudit() {
+    return this.auditService.getAudit();
   }
 }

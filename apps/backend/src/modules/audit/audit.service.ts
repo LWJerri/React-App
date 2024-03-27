@@ -5,7 +5,7 @@ import { PrismaService } from "../prisma/prisma.service";
 export class AuditService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getAuditHistory() {
+  async getAudit() {
     const retrieveAuditLog = await this.prismaService.auditLog.findMany({ orderBy: { createdAt: "desc" } });
 
     return retrieveAuditLog;
