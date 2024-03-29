@@ -22,7 +22,4 @@ export class AuditEntity implements AuditLog {
 
   @ApiProperty({ example: new Date().toISOString(), description: "The date on which the action was performed." })
   readonly createdAt: Date;
-
-  @ApiProperty({ example: new Date().toISOString(), description: "The date on which the action was performed." })
-  readonly updatedAt: Date;
 }
