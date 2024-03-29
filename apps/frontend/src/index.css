@@ -34,6 +34,14 @@
   .muted {
     @apply text-sm text-muted-foreground;
   }
+
+  .flip-scrollbar {
+    transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg); /* Mozilla */
+    -webkit-transform: rotateX(180deg); /* Safari and Chrome */
+    -ms-transform: rotateX(180deg); /* IE 9+ */
+    -o-transform: rotateX(180deg); /* Opera */
+  }
 }
 
 @layer base {
