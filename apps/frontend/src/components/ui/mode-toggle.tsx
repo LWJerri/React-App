@@ -9,7 +9,7 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" size={"icon"}>
           <IconSun
             stroke={1.5}
             size={16}
