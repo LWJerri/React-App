@@ -70,27 +70,31 @@ const EditList = (props: { open: boolean; close: () => void; listId: string }) =
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel className="font-normal">Name</FormLabel>
-                  <Input
-                    type="text"
-                    defaultValue={getList.name}
-                    onInput={field.onChange}
-                    onChange={() => field.value}
-                  />
-                  <FormMessage className="font-normal" />
-                </FormItem>
-              )}
-            />
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-4">
+            <div>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel className="font-normal">Name</FormLabel>
+                    <Input
+                      type="text"
+                      defaultValue={getList.name}
+                      onInput={field.onChange}
+                      onChange={() => field.value}
+                    />
+                    <FormMessage className="font-normal" />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-            <DialogFooter>
-              <Button type="submit">Save</Button>
-            </DialogFooter>
+            <div>
+              <DialogFooter>
+                <Button type="submit">Save</Button>
+              </DialogFooter>
+            </div>
           </form>
         </Form>
       </DialogContent>
