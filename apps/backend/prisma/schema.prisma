@@ -20,6 +20,11 @@ enum Action {
   DELETE
 }
 
+enum Model {
+  LIST
+  TASK
+}
+
 model List {
   id        String   @id @default(cuid())
   name      String
@@ -47,11 +52,12 @@ model Task {
 model AuditLog {
   id            String   @id @default(cuid())
   action        Action
+  relatedModel  Model    @map("related_model")
   relatedId     String   @map("related_id")
   affectedField String   @map("affected_field")
-  newState      String?  @map("new_state")
-  oldState      String?  @map("old_state")
   createdAt     DateTime @default(now()) @map("created_at")
+  newState      Json?    @map("new_state")
+  oldState      Json?    @map("old_state")
 
   @@map("audit_logs")
 }
