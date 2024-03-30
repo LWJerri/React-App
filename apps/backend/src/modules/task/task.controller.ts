@@ -7,12 +7,12 @@ import {
   ApiOperation,
   ApiParam,
 } from "@nestjs/swagger";
-import { NestResponse } from "src/helpers/NestResponse";
-import { responses } from "src/helpers/constants";
-import { AuditEntity } from "../audit/entities/audit.entity";
+import { FallbackResponse } from "src/helpers/FallbackResponse";
+import { responseStatus } from "src/helpers/constants";
+import { ResponseAuditTaskDto } from "../audit/dto/response.dto";
 import { CreateTaskDto } from "./dto/create.dto";
 import { PatchTaskDto } from "./dto/patch.dto";
-import { GetEntity } from "./entities/get.entity";
+import { ResponseTaskDto } from "./dto/response.dto";
 import { GetTaskGuard } from "./guards/get.guard";
 import { PatchTaskGuard } from "./guards/patch.guard";
 import { TaskGuard } from "./guards/task.guard";
@@ -29,9 +29,9 @@ export class TaskController {
     tags: ["Tasks Endpoints"],
     description: "This endpoint will return a list of all created tasks for the specified list.",
   })
-  @ApiOkResponse({ type: GetEntity, isArray: true, description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseTaskDto, isArray: true, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiParam({
     name: "listId",
     example: "clu1q9zal000508l0cmq7b24e ",
@@ -47,9 +47,9 @@ export class TaskController {
     tags: ["Tasks Endpoints"],
     description: "This endpoint will return a list of all changes that are associated with the specified task.",
   })
-  @ApiOkResponse({ type: AuditEntity, isArray: true, description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseAuditTaskDto, isArray: true, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiParam({
     name: "id",
     example: "clu1qbwq6000608l016lme5b0 ",
@@ -66,9 +66,9 @@ export class TaskController {
     tags: ["Tasks Endpoints"],
     description: "This endpoint will return an object with detailed information about a specific task.",
   })
-  @ApiOkResponse({ type: GetEntity, description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseTaskDto, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiParam({
     name: "id",
     example: "clu1qdgea000708l097xq1jb9 ",
@@ -85,9 +85,9 @@ export class TaskController {
     tags: ["Tasks Endpoints"],
     description: "This endpoint accepts parameters to create a task and returns an object with the created task.",
   })
-  @ApiOkResponse({ type: GetEntity, description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseTaskDto, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiBody({ type: CreateTaskDto })
   @ApiParam({
     name: "listId",
@@ -104,9 +104,9 @@ export class TaskController {
     tags: ["Tasks Endpoints"],
     description: "This endpoint accepts parameters to edit an existing task and returns a new object.",
   })
-  @ApiOkResponse({ type: GetEntity, description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseTaskDto, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiBody({ type: PatchTaskDto })
   @ApiParam({
     name: "id",
@@ -124,9 +124,9 @@ export class TaskController {
     tags: ["Tasks Endpoints"],
     description: "This endpoint removes the task from the database.",
   })
-  @ApiOkResponse({ description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiParam({
     name: "id",
     example: "clu1qiv97000a08l0e1185dzw ",

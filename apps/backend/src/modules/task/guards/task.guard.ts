@@ -9,7 +9,10 @@ export class TaskGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const { params } = context.switchToHttp().getRequest<Request>();
 
-    const isListExists = await this.prismaService.list.findUnique({ where: { id: params.listId } });
+    const isListExists = await this.prismaService.list.findUnique({
+      where: { id: params.listId },
+      select: { id: true },
+    });
 
     if (!isListExists) throw new NotFoundException("No list with this Id was found.");
 

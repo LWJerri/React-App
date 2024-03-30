@@ -1,16 +1,18 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Priority, Task } from "@prisma/client";
+import { Priority } from "@prisma/client";
 
-export class GetEntity implements Task {
-  @ApiProperty({ example: "clu1q2t4h000308l02jl2d8ze ", description: "Unique Id of the record in the database" })
+export class ResponseTaskDto {
+  @ApiProperty({ example: "clu1q2t4h000308l02jl2d8ze", description: "Unique Id of the record in the database" })
   readonly id: string;
 
-  @ApiProperty({ example: "My awesome task", description: "Title for the task." })
+  @ApiProperty({ example: "My awesome task", description: "Title for the task.", minLength: 3, maxLength: 20 })
   readonly name: string;
 
   @ApiProperty({
     example: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     description: "Detailed description for the task.",
+    minLength: 1,
+    maxLength: 3000,
   })
   readonly description: string;
 
@@ -27,7 +29,7 @@ export class GetEntity implements Task {
   readonly updatedAt: Date;
 
   @ApiProperty({
-    example: "clu1q5lg9000408l010be3hld ",
+    example: "clu1q5lg9000408l010be3hld",
     description: "The unique Id of the list to which the task is bound.",
   })
   readonly listId: string;
