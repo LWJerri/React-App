@@ -10,7 +10,7 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import ListSelector from "../task/ListSelector";
+import ListSelector from "../selectors/ListSelector";
 import TaskDropdown from "../task/TaskDropdown";
 
 const KanbanTask = (props: { listId: string }) => {

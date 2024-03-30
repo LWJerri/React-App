@@ -1,8 +1,8 @@
 import { IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
-import NewTask from "../task/NewTask";
+import CreateTask from "../task/CreateTask";
 
-const KanbanNewTaskButton = (props: { listId: string }) => {
+const KanbanTaskButton = (props: { listId: string }) => {
   const { listId } = props;
 
   const [openNewTask, setOpenNewTask] = useState(false);
@@ -19,9 +19,9 @@ const KanbanNewTaskButton = (props: { listId: string }) => {
         </div>
       </div>
 
-      <NewTask open={openNewTask} close={() => setOpenNewTask(false)} listId={listId} />
+      <CreateTask open={openNewTask} close={() => setOpenNewTask(false)} listId={listId} />
     </div>
   );
 };
 
-export default KanbanNewTaskButton;
+export default KanbanTaskButton;

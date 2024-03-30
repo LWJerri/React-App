@@ -3,7 +3,7 @@ import { IconHistory, IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
 import { Button } from "../../ui/button";
 import History from "../History";
-import NewList from "../list/NewList";
+import CreateList from "../list/CreateList";
 
 const Navbar = () => {
   const [showHistory, setShowHistory] = useState(false);
@@ -32,7 +32,7 @@ const Navbar = () => {
       </div>
 
       <History open={showHistory} close={() => setShowHistory(false)} />
-      <NewList open={openNewList} close={() => setNewList(false)} />
+      <CreateList open={openNewList} close={() => setNewList(false)} />
     </div>
   );
 };

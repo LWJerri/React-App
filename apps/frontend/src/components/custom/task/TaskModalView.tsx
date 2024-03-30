@@ -14,7 +14,7 @@ import { format } from "date-fns";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const TaskModal = (props: { open: boolean; close: () => void; task: Task }) => {
+const TaskModalView = (props: { open: boolean; close: () => void; task: Task }) => {
   const { open, close, task } = props;
 
   return (
@@ -53,4 +53,4 @@ const TaskModal = (props: { open: boolean; close: () => void; task: Task }) => {
   );
 };
 
-export default TaskModal;
+export default TaskModalView;

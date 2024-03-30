@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Button } from "../../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem } from "../../ui/dropdown-menu";
 import EditList from "../list/EditList";
-import NewTask from "../task/NewTask";
+import CreateTask from "../task/CreateTask";
 
 const KanbanDropdown = (props: { list: List }) => {
   const { list } = props;
@@ -84,7 +84,7 @@ const KanbanDropdown = (props: { list: List }) => {
       </DropdownMenu>
 
       <EditList open={openEditList} close={() => setOpenEditList(false)} listId={list.id} />
-      <NewTask open={openNewTask} close={() => setOpenNewTask(false)} listId={list.id} />
+      <CreateTask open={openNewTask} close={() => setOpenNewTask(false)} listId={list.id} />
     </div>
   );
 };

@@ -13,7 +13,7 @@ const FormSchema = z.object({
   name: z.string().trim().min(3).max(20),
 });
 
-const NewList = (props: { open: boolean; close: () => void }) => {
+const CreateList = (props: { open: boolean; close: () => void }) => {
   const { open, close } = props;
 
   const { toast } = useToast();
@@ -101,4 +101,4 @@ const NewList = (props: { open: boolean; close: () => void }) => {
   );
 };
 
-export default NewList;
+export default CreateList;
