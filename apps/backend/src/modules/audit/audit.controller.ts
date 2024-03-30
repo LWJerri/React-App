@@ -11,8 +11,7 @@ export class AuditController {
 
   @Get()
   @ApiOperation({
-    summary: "Audit log",
-    tags: ["Audit Log"],
+    summary: "Global audit log",
     description: "This request will return the entire history of actions on lists and tasks.",
   })
   @ApiOkResponse({ type: ResponseAuditDto, isArray: true, description: responseStatus["success"] })
