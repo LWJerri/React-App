@@ -6,13 +6,13 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiParam,
-  OmitType,
 } from "@nestjs/swagger";
-import { NestResponse } from "src/helpers/NestResponse";
-import { responses } from "src/helpers/constants";
+import { FallbackResponse } from "src/helpers/FallbackResponse";
+import { responseStatus } from "src/helpers/constants";
 import { CreateListDto } from "./dto/create.dto";
-import { PatchListDto } from "./dto/patch";
-import { GetEntity } from "./entities/get.entity";
+import { PatchListDto } from "./dto/patch.dto";
+import { ResponseListDto } from "./dto/response.dto";
+import { ResponseListWithTaskFieldDto } from "./dto/responseWithTaskField.dto";
 import { CreateListGuard } from "./guards/create.guard";
 import { DeleteListGuard } from "./guards/delete.guard";
 import { PatchListGuard } from "./guards/patch.guard";
@@ -28,9 +28,9 @@ export class ListController {
     tags: ["Lists Endpoints"],
     description: "This endpoint returns a list of all created lists.",
   })
-  @ApiOkResponse({ type: GetEntity, isArray: true, description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseListWithTaskFieldDto, isArray: true, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   getLists() {
     return this.listService.getLists();
   }
@@ -42,9 +42,9 @@ export class ListController {
     description:
       "This endpoint creates a new list in the database with the specified parameters and returns an object with the new list.",
   })
-  @ApiOkResponse({ type: OmitType(GetEntity, ["task"]), description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseListDto, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiBody({ type: CreateListDto })
   @UseGuards(CreateListGuard)
   createList(@Body() body: CreateListDto) {
@@ -57,9 +57,9 @@ export class ListController {
     tags: ["Lists Endpoints"],
     description: "This endpoint accepts parameters to edit an existing list and returns a new list object.",
   })
-  @ApiOkResponse({ type: OmitType(GetEntity, ["task"]), description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseListDto, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiBody({ type: PatchListDto })
   @ApiParam({
     name: "id",
@@ -77,9 +77,9 @@ export class ListController {
     tags: ["Lists Endpoints"],
     description: "This endpoint deletes the list with all tasks bound to the list.",
   })
-  @ApiOkResponse({ description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiParam({
     name: "id",
     example: "clu1pxcl2000108l06gqlbot3",

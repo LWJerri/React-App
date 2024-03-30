@@ -1,15 +1,17 @@
 import { Injectable } from "@nestjs/common";
-import { Action, List } from "@prisma/client";
+import { List, Prisma } from "@prisma/client";
 import { updatedDiff } from "deep-object-diff";
 import { PrismaService } from "../prisma/prisma.service";
 import { CreateListDto } from "./dto/create.dto";
-import { PatchListDto } from "./dto/patch";
+import { PatchListDto } from "./dto/patch.dto";
+import { ResponseListDto } from "./dto/response.dto";
+import { ResponseListWithTaskFieldDto } from "./dto/responseWithTaskField.dto";
 
 @Injectable()
 export class ListService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getLists() {
+  async getLists(): Promise<ResponseListWithTaskFieldDto[]> {
     const retrieveLists = await this.prismaService.list.findMany({
       orderBy: { createdAt: "desc" },
       include: { _count: true },
@@ -24,34 +26,35 @@ export class ListService {
     return lists;
   }
 
-  async createList(body: CreateListDto) {
+  async createList(body: CreateListDto): Promise<ResponseListDto> {
     const list = await this.prismaService.list.create({ data: { ...body } });
 
     await this.prismaService.auditLog.create({
-      data: { action: "CREATE", affectedField: "name", relatedId: list.id, newState: list.name },
+      data: { action: "CREATE", affectedField: "name", relatedId: list.id, relatedModel: "LIST", newState: list },
     });
 
     return list;
   }
 
-  async patchList(body: PatchListDto, id: string) {
-    const prepOldList = await this.prismaService.list.findUnique({ where: { id } });
-    const oldList = prepOldList!;
+  async patchList(body: PatchListDto, id: string): Promise<ResponseListDto> {
+    const prepOldState = await this.prismaService.list.findUnique({ where: { id } });
+    const oldState = prepOldState!;
 
     const list = await this.prismaService.list.update({ where: { id }, data: { ...body, updatedAt: new Date() } });
 
-    const filterKey: keyof List = "updatedAt";
+    const updatedAtKey: keyof List = "updatedAt";
 
-    const prepNewChanges = updatedDiff(oldList, list);
-    const newChanges = Object.keys(prepNewChanges).filter((key) => key !== filterKey);
+    const prepNewChanges = updatedDiff(oldState, list);
+    const newChanges = Object.keys(prepNewChanges).filter((key) => key !== updatedAtKey);
 
-    const auditLogData = Object.keys(newChanges).map((key) => {
-      const affectedField = key as keyof List;
-      const newState = String(list[affectedField]);
-      const oldState = String(oldList[affectedField]);
-
-      return { action: Action.EDIT, affectedField, relatedId: list.id, newState, oldState };
-    });
+    const auditLogData: Prisma.AuditLogCreateManyInput[] = newChanges.map((key) => ({
+      action: "EDIT",
+      affectedField: key,
+      relatedId: list.id,
+      relatedModel: "LIST",
+      newState: list,
+      oldState,
+    }));
 
     await this.prismaService.auditLog.createMany({ data: auditLogData });
 
@@ -62,7 +65,7 @@ export class ListService {
     const list = await this.prismaService.list.delete({ where: { id } });
 
     await this.prismaService.auditLog.create({
-      data: { action: "DELETE", affectedField: "name", relatedId: list.id, oldState: list.name },
+      data: { action: "DELETE", affectedField: "name", relatedId: list.id, relatedModel: "LIST", oldState: list },
     });
   }
 }
