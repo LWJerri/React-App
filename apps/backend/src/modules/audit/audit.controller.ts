@@ -1,9 +1,9 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiOkResponse, ApiOperation } from "@nestjs/swagger";
-import { NestResponse } from "src/helpers/NestResponse";
-import { responses } from "src/helpers/constants";
+import { FallbackResponse } from "src/helpers/FallbackResponse";
+import { responseStatus } from "src/helpers/constants";
 import { AuditService } from "./audit.service";
-import { AuditEntity } from "./entities/audit.entity";
+import { ResponseAuditDto } from "./dto/response.dto";
 
 @Controller("audit")
 export class AuditController {
@@ -15,9 +15,9 @@ export class AuditController {
     tags: ["Audit Log"],
     description: "This request will return the entire history of actions on lists and tasks.",
   })
-  @ApiOkResponse({ type: AuditEntity, isArray: true, description: responses.success })
-  @ApiBadRequestResponse({ type: NestResponse, description: responses.error })
-  @ApiInternalServerErrorResponse({ type: NestResponse, description: responses.error })
+  @ApiOkResponse({ type: ResponseAuditDto, isArray: true, description: responseStatus["success"] })
+  @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   getAudit() {
     return this.auditService.getAudit();
   }
