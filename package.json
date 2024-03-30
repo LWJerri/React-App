@@ -8,7 +8,8 @@
     "backend:start": "pnpm -F @task-manager/backend start",
     "backend:dev": "pnpm -F @task-manager/backend dev",
     "frontend:build": "pnpm -F @task-manager/frontend build",
-    "frontend:dev": "pnpm -F @task-manager/frontend dev"
+    "frontend:dev": "pnpm -F @task-manager/frontend dev",
+    "frontend:sync": "pnpm -F @task-manager/frontend sync"
   },
   "engines": {
     "node": ">=18"
