@@ -6,6 +6,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiParam,
+  OmitType,
 } from "@nestjs/swagger";
 import { FallbackResponse } from "src/helpers/FallbackResponse";
 import { responseStatus } from "src/helpers/constants";
@@ -42,7 +43,7 @@ export class ListController {
     description:
       "This endpoint creates a new list in the database with the specified parameters and returns an object with the new list.",
   })
-  @ApiOkResponse({ type: ResponseListDto, description: responseStatus["success"] })
+  @ApiOkResponse({ type: OmitType(ResponseListDto, ["task"]), description: responseStatus["success"] })
   @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiBody({ type: CreateListDto })

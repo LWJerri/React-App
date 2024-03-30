@@ -12,4 +12,7 @@ export class ResponseListDto {
 
   @ApiProperty({ example: new Date().toISOString(), description: "Date the list was updated." })
   readonly updatedAt: Date;
+
+  @ApiProperty({ example: 0, description: "Number of tasks in the list." })
+  readonly task: number;
 }

@@ -26,7 +26,7 @@ export class ListService {
     return lists;
   }
 
-  async createList(body: CreateListDto): Promise<ResponseListDto> {
+  async createList(body: CreateListDto): Promise<Omit<ResponseListDto, "task">> {
     const list = await this.prismaService.list.create({ data: { ...body } });
 
     await this.prismaService.auditLog.create({
@@ -40,25 +40,30 @@ export class ListService {
     const prepOldState = await this.prismaService.list.findUnique({ where: { id } });
     const oldState = prepOldState!;
 
-    const list = await this.prismaService.list.update({ where: { id }, data: { ...body, updatedAt: new Date() } });
+    const prepList = await this.prismaService.list.update({
+      where: { id },
+      data: { ...body, updatedAt: new Date() },
+      include: { _count: true },
+    });
+    const { _count, ...fields } = prepList;
 
     const updatedAtKey: keyof List = "updatedAt";
 
-    const prepNewChanges = updatedDiff(oldState, list);
+    const prepNewChanges = updatedDiff(oldState, prepList);
     const newChanges = Object.keys(prepNewChanges).filter((key) => key !== updatedAtKey);
 
     const auditLogData: Prisma.AuditLogCreateManyInput[] = newChanges.map((key) => ({
       action: "EDIT",
       affectedField: key,
-      relatedId: list.id,
+      relatedId: prepList.id,
       relatedModel: "LIST",
-      newState: list,
+      newState: prepList,
       oldState,
     }));
 
     await this.prismaService.auditLog.createMany({ data: auditLogData });
 
-    return list;
+    return { ...fields, ..._count };
   }
 
   async deleteList(id: string) {
