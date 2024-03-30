@@ -1,4 +1,5 @@
 import api from "@/app/api";
+import { store } from "@/app/store";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -20,9 +21,13 @@ const KanbanTask = (props: { listId: string }) => {
 
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  store.subscribe(({ tasks }) => setTasks(tasks));
+
+  const loadTasksToStore = store((state) => state.loadTasks);
+
   useEffect(() => {
     api.GET("/api/lists/{listId}/tasks", { params: { path: { listId } } }).then(({ data, error }) => {
-      if (data) return setTasks(data);
+      if (data) return loadTasksToStore(data);
 
       if (!error) {
         toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
