@@ -1,11 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
-export class NestResponse {
+export class FallbackResponse {
   @ApiProperty({ example: 404, description: "Error in numeric format." })
   statusCode: number;
 
   @ApiProperty({
-    description: "Detailed description of the error. This field can be <b>string</b> or <b>array of strings</b>.",
+    description: "Detailed description of the error.",
     oneOf: [{ type: "string" }, { type: "array", items: { type: "string" } }],
   })
   message: string | string[];
