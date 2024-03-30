@@ -1,4 +1,4 @@
-import React from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { Toaster } from "./components/ui/toaster";
@@ -11,9 +11,9 @@ if (!container) throw new Error("Root element not found.");
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
 
     <Toaster />
-  </React.StrictMode>,
+  </StrictMode>,
 );
