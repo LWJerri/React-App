@@ -1,4 +1,5 @@
 import { Priority } from "@/enums/priority";
+import { List } from "@/types/List";
 
 export interface Store {
   listId: string;
@@ -12,6 +13,11 @@ export interface Store {
   priority: Priority;
   setPriority: (priority: Priority) => void;
   getPriority: () => Priority;
+
+  lists: List[];
+  setLists: (lists: List[]) => void;
+  updateLists: (list: List) => void;
+  getLists: () => List[];
 
   reset: () => void;
 }

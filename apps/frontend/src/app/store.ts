@@ -1,5 +1,6 @@
 import { Priority } from "@/enums/priority";
 import { Store } from "@/interfaces/Store";
+import { List } from "@/types/List";
 import { create } from "zustand";
 
 export const store = create<Store>((set, get) => ({
@@ -14,6 +15,11 @@ export const store = create<Store>((set, get) => ({
   priority: Priority.LOW,
   setPriority: (value: Priority) => set(() => ({ priority: value })),
   getPriority: () => get().priority,
+
+  lists: [],
+  setLists: (lists: List[]) => set(() => ({ lists })),
+  updateLists: (list: List) => set((state) => ({ lists: [...state.lists, list] })),
+  getLists: () => get().lists,
 
   reset: () => set({ dueAt: "", listId: "", priority: Priority.LOW }),
 }));
