@@ -91,13 +91,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-30T12:37:22.673Z
+       * @example 2024-03-30T18:58:34.654Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-30T12:37:22.674Z
+       * @example 2024-03-30T18:58:34.655Z
        */
       updatedAt: string;
       /**
@@ -127,6 +127,37 @@ export interface components {
        */
       name: string;
     };
+    OmitTypeClass: {
+      /**
+       * @description Unique Id of the record in the database
+       * @example clu1pl3ku000508jxh4p5hqrw
+       */
+      id: string;
+      /**
+       * @description Title for the list.
+       * @example Triage
+       */
+      name: string;
+      /**
+       * Format: date-time
+       * @description Date the list was created.
+       * @example 2024-03-30T18:58:34.654Z
+       */
+      createdAt: string;
+      /**
+       * Format: date-time
+       * @description Date the list was updated.
+       * @example 2024-03-30T18:58:34.655Z
+       */
+      updatedAt: string;
+    };
+    PatchListDto: {
+      /**
+       * @description Title for the list.
+       * @example Triage
+       */
+      name: string;
+    };
     ResponseListDto: {
       /**
        * @description Unique Id of the record in the database
@@ -141,22 +172,20 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-30T12:37:22.673Z
+       * @example 2024-03-30T18:58:34.654Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-30T12:37:22.674Z
+       * @example 2024-03-30T18:58:34.655Z
        */
       updatedAt: string;
-    };
-    PatchListDto: {
       /**
-       * @description Title for the list.
-       * @example Triage
+       * @description Number of tasks in the list.
+       * @example 0
        */
-      name: string;
+      task: number;
     };
     ResponseTaskDto: {
       /**
@@ -177,7 +206,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The time by which the task must be completed.
-       * @example 2024-03-30T12:37:22.675Z
+       * @example 2024-03-30T18:58:34.655Z
        */
       dueAt: string;
       /**
@@ -189,13 +218,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the task was created.
-       * @example 2024-03-30T12:37:22.675Z
+       * @example 2024-03-30T18:58:34.656Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the task was updated.
-       * @example 2024-03-30T12:37:22.675Z
+       * @example 2024-03-30T18:58:34.656Z
        */
       updatedAt: string;
       /**
@@ -225,7 +254,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-30T12:37:22.676Z
+       * @example 2024-03-30T18:58:34.656Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -246,7 +275,7 @@ export interface components {
       description: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-30T12:37:22.795Z
+       * @example 2024-03-30T18:58:34.762Z
        */
       dueAt: string;
       /**
@@ -269,7 +298,7 @@ export interface components {
       description?: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-30T12:37:22.795Z
+       * @example 2024-03-30T18:58:34.762Z
        */
       dueAt?: string;
       /**
@@ -305,7 +334,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-30T12:37:22.676Z
+       * @example 2024-03-30T18:58:34.656Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -366,7 +395,7 @@ export interface operations {
       /** @description Response when the request is successfully processed. */
       200: {
         content: {
-          "application/json": components["schemas"]["ResponseListDto"];
+          "application/json": components["schemas"]["OmitTypeClass"];
         };
       };
       /** @description Response if an error occurs while processing a request. */
