@@ -23,7 +23,6 @@
     "clsx": "2.1.0",
     "cmdk": "0.2.1",
     "date-fns": "3.6.0",
-    "lucide-react": "0.363.0",
     "openapi-fetch": "0.9.3",
     "openapi-typescript": "6.7.5",
     "react": "18.2.0",
