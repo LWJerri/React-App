@@ -12,7 +12,6 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ListSelector from "../task/ListSelector";
 import TaskDropdown from "../task/TaskDropdown";
-import TaskModal from "../task/TaskModal";
 
 const KanbanTask = (props: { listId: string }) => {
   const { listId } = props;
@@ -20,8 +19,6 @@ const KanbanTask = (props: { listId: string }) => {
   const { toast } = useToast();
 
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [task, setTask] = useState<Task>();
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     api.GET("/api/lists/{listId}/tasks", { params: { path: { listId } } }).then(({ data, error }) => {
@@ -43,22 +40,18 @@ const KanbanTask = (props: { listId: string }) => {
 
   return (
     <div className="grid gap-4">
-      {tasks.map((task, index) => (
+      {tasks.map((task) => (
         <Card
           className={cn(
             "transition-all duration-150 hover:cursor-pointer hover:border-dashed",
             task.priority === "CRITICAL" || task.priority === "HIGH" ? "hover:bg-red-300" : "hover:bg-muted ",
           )}
-          key={index}
-          onClick={() => {
-            setTask(task);
-            setShowModal(!showModal);
-          }}
+          key={task.id}
         >
           <CardHeader>
             <div className="flex w-full items-center justify-between">
               <CardTitle>{task.name}</CardTitle>
-              <TaskDropdown />
+              <TaskDropdown task={task} />
             </div>
           </CardHeader>
 
@@ -86,8 +79,6 @@ const KanbanTask = (props: { listId: string }) => {
           </CardFooter>
         </Card>
       ))}
-
-      {task && <TaskModal task={task} open={showModal} close={() => setShowModal(!showModal)} />}
     </div>
   );
 };
