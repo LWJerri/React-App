@@ -91,13 +91,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-30T18:58:34.654Z
+       * @example 2024-03-31T00:26:40.496Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-30T18:58:34.655Z
+       * @example 2024-03-31T00:26:40.497Z
        */
       updatedAt: string;
       /**
@@ -141,13 +141,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-30T18:58:34.654Z
+       * @example 2024-03-31T00:26:40.496Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-30T18:58:34.655Z
+       * @example 2024-03-31T00:26:40.497Z
        */
       updatedAt: string;
     };
@@ -172,13 +172,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-30T18:58:34.654Z
+       * @example 2024-03-31T00:26:40.496Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-30T18:58:34.655Z
+       * @example 2024-03-31T00:26:40.497Z
        */
       updatedAt: string;
       /**
@@ -206,7 +206,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The time by which the task must be completed.
-       * @example 2024-03-30T18:58:34.655Z
+       * @example 2024-03-31T00:26:40.498Z
        */
       dueAt: string;
       /**
@@ -218,13 +218,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the task was created.
-       * @example 2024-03-30T18:58:34.656Z
+       * @example 2024-03-31T00:26:40.498Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the task was updated.
-       * @example 2024-03-30T18:58:34.656Z
+       * @example 2024-03-31T00:26:40.498Z
        */
       updatedAt: string;
       /**
@@ -254,7 +254,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-30T18:58:34.656Z
+       * @example 2024-03-31T00:26:40.498Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -275,7 +275,7 @@ export interface components {
       description: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-30T18:58:34.762Z
+       * @example 2024-03-31T00:26:40.633Z
        */
       dueAt: string;
       /**
@@ -298,7 +298,7 @@ export interface components {
       description?: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-30T18:58:34.762Z
+       * @example 2024-03-31T00:26:40.633Z
        */
       dueAt?: string;
       /**
@@ -334,7 +334,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-30T18:58:34.656Z
+       * @example 2024-03-31T00:26:40.498Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -572,6 +572,11 @@ export interface operations {
          * @example clu1qbwq6000608l016lme5b0
          */
         id: string;
+        /**
+         * @description Specify the Id of the list for which you want to retrieve tasks.
+         * @example clu1q9zal000508l0cmq7b24e
+         */
+        listId: unknown;
       };
     };
     responses: {
@@ -607,6 +612,11 @@ export interface operations {
          * @example clu1qdgea000708l097xq1jb9
          */
         id: string;
+        /**
+         * @description Specify the Id of the list for which you want to retrieve tasks.
+         * @example clu1q9zal000508l0cmq7b24e
+         */
+        listId: unknown;
       };
     };
     responses: {
@@ -642,6 +652,11 @@ export interface operations {
          * @example clu1qiv97000a08l0e1185dzw
          */
         id: string;
+        /**
+         * @description Specify the Id of the list for which you want to retrieve tasks.
+         * @example clu1q9zal000508l0cmq7b24e
+         */
+        listId: unknown;
       };
     };
     responses: {
@@ -675,6 +690,11 @@ export interface operations {
          * @example clu1qhhuj000908l0bt4j5u3l
          */
         id: string;
+        /**
+         * @description Specify the Id of the list for which you want to retrieve tasks.
+         * @example clu1q9zal000508l0cmq7b24e
+         */
+        listId: unknown;
       };
     };
     requestBody: {
