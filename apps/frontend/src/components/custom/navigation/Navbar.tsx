@@ -7,7 +7,7 @@ import CreateList from "../list/CreateList";
 
 const Navbar = () => {
   const [showHistory, setShowHistory] = useState(false);
-  const [openNewList, setNewList] = useState(false);
+  const [openNewList, setOpenNewList] = useState(false);
 
   return (
     <div>
@@ -24,7 +24,7 @@ const Navbar = () => {
             History
           </Button>
 
-          <Button onClick={() => setNewList(!openNewList)}>
+          <Button onClick={() => setOpenNewList(!openNewList)}>
             <IconPlus stroke={1.5} className="mr-2" />
             Create new list
           </Button>
@@ -32,7 +32,7 @@ const Navbar = () => {
       </div>
 
       <History open={showHistory} close={() => setShowHistory(false)} />
-      <CreateList open={openNewList} close={() => setNewList(false)} />
+      <CreateList open={openNewList} close={() => setOpenNewList(false)} />
     </div>
   );
 };
