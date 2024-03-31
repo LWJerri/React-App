@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, CanActivate, ExecutionContext, Injectable, NotFoundException } from "@nestjs/common";
 import { Request } from "express";
 import { PrismaService } from "../../prisma/prisma.service";
 
@@ -9,13 +9,15 @@ export class PatchTaskGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const { body, params } = context.switchToHttp().getRequest<Request>();
 
-    if (body.listId) {
+    if (body?.listId && body?.listId !== "") {
       const isListExists = await this.prismaService.list.findUnique({
         where: { id: String(body.listId) },
         select: { id: true },
       });
 
-      if (!isListExists) throw new NotFoundException("No list with this Id was found.");
+      if (!isListExists) throw new NotFoundException("No new list with this Id was found.");
+    } else {
+      throw new BadRequestException("listId field must be filled if exists.");
     }
 
     const isTaskExists = await this.prismaService.task.findUnique({ where: { id: params.id }, select: { id: true } });
