@@ -43,7 +43,7 @@ const App = () => {
     <ThemeProvider>
       <Navbar />
 
-      {!loading && lists.length >= 1 && (
+      {!loading && lists.length > 0 && (
         <div className="flip-scrollbar grid max-w-full auto-cols-max grid-flow-col gap-4 overflow-x-auto p-2.5">
           {lists.map((list) => (
             <div className="flip-scrollbar w-[350px]" key={list.id}>
