@@ -12,6 +12,7 @@ import { Task } from "@/types/Task";
 import { IconCalendarDue, IconTimelineEventPlus } from "@tabler/icons-react";
 import { format } from "date-fns";
 import Markdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
 const TaskModalView = (props: { open: boolean; close: () => void; task: Task }) => {
@@ -25,7 +26,11 @@ const TaskModalView = (props: { open: boolean; close: () => void; task: Task }) 
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
-        <Markdown remarkPlugins={[remarkGfm]} className="small max-h-full min-h-96 overflow-y-auto font-normal">
+        <Markdown
+          rehypePlugins={[rehypeHighlight]}
+          remarkPlugins={[remarkGfm]}
+          className="small max-h-full min-h-96 overflow-y-auto font-normal"
+        >
           {task.description}
         </Markdown>
 

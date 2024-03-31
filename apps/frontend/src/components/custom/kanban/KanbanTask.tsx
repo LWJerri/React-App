@@ -9,6 +9,7 @@ import { IconCalendarDue } from "@tabler/icons-react";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 import ListSelector from "../selectors/ListSelector";
 import TaskDropdown from "../task/TaskDropdown";
@@ -73,7 +74,7 @@ const KanbanTask = (props: { listId: string }) => {
             </CardHeader>
 
             <CardContent className="small max-h-96 font-normal">
-              <Markdown remarkPlugins={[remarkGfm]}>
+              <Markdown rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm]}>
                 {task.description.length > 500 ? task.description.slice(0, 500) + "..." : task.description}
               </Markdown>
             </CardContent>
