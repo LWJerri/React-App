@@ -78,16 +78,12 @@ const History = (props: { open: boolean; close: () => void }) => {
 
                   {item.action === "EDIT" && item.affectedField === "listId" && (
                     <p>
-                      You edit {item.relatedModel.toLowerCase()} {item.affectedField} <span> from </span>
-                      <b>
-                        {/* @ts-ignore */}
-                        {getList(item.oldState[item.affectedField])?.name ?? item.oldState[item.affectedField]}
-                      </b>
+                      You moved task <b>{item.newState.name}</b> <span>from </span>
+                      {/* @ts-ignore */}
+                      {getList(item.oldState[item.affectedField])?.name ?? item.oldState[item.affectedField]}
                       <span> to </span>
-                      <b>
-                        {/* @ts-ignore */}
-                        {getList(item.newState[item.affectedField])?.name ?? item.newState[item.affectedField]}
-                      </b>
+                      {/* @ts-ignore */}
+                      {getList(item.newState[item.affectedField])?.name ?? item.newState[item.affectedField]}
                     </p>
                   )}
                   <p className="flex-none">{format(item.createdAt, "dd.MM.yyyy")}</p>

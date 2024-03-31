@@ -93,7 +93,7 @@ const KanbanTask = (props: { listId: string }) => {
                   </Badge>
                 </div>
 
-                <ListSelector placeholder="Move to..." />
+                <ListSelector placeholder="Move to..." immediatelyMove={true} taskId={task.id} listId={task.listId} />
               </div>
             </CardFooter>
           </Card>
