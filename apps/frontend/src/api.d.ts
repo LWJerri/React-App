@@ -91,13 +91,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-31T06:21:49.847Z
+       * @example 2024-03-31T08:00:07.265Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-31T06:21:49.848Z
+       * @example 2024-03-31T08:00:07.265Z
        */
       updatedAt: string;
       /**
@@ -141,13 +141,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-31T06:21:49.847Z
+       * @example 2024-03-31T08:00:07.265Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-31T06:21:49.848Z
+       * @example 2024-03-31T08:00:07.265Z
        */
       updatedAt: string;
     };
@@ -172,13 +172,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-31T06:21:49.847Z
+       * @example 2024-03-31T08:00:07.265Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-31T06:21:49.848Z
+       * @example 2024-03-31T08:00:07.265Z
        */
       updatedAt: string;
       /**
@@ -206,7 +206,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The time by which the task must be completed.
-       * @example 2024-03-31T06:21:49.849Z
+       * @example 2024-03-31T08:00:07.266Z
        */
       dueAt: string;
       /**
@@ -218,13 +218,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the task was created.
-       * @example 2024-03-31T06:21:49.849Z
+       * @example 2024-03-31T08:00:07.266Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the task was updated.
-       * @example 2024-03-31T06:21:49.849Z
+       * @example 2024-03-31T08:00:07.266Z
        */
       updatedAt: string;
       /**
@@ -254,7 +254,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-31T06:21:49.849Z
+       * @example 2024-03-31T08:00:07.267Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -275,7 +275,7 @@ export interface components {
       description: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-31T06:21:49.969Z
+       * @example 2024-03-31T08:00:07.377Z
        */
       dueAt: string;
       /**
@@ -298,7 +298,7 @@ export interface components {
       description?: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-31T06:21:49.969Z
+       * @example 2024-03-31T08:00:07.377Z
        */
       dueAt?: string;
       /**
@@ -334,7 +334,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-31T06:21:49.849Z
+       * @example 2024-03-31T08:00:07.267Z
        */
       createdAt: string;
       /** @description The new state of the object. */
