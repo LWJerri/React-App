@@ -7,7 +7,10 @@ export const store = create<Store>((set, get) => ({
   lists: [],
   getLists: () => get().lists,
   getList: (listId: string) => get().lists.find((list) => list.id === listId)!,
-  addLists: (newLists: List[]) => set(({ lists }) => ({ lists: [...newLists, ...lists] })),
+  addLists: (newLists: List[]) =>
+    set(({ lists }) => ({
+      lists: [...newLists].filter((newList) => !lists.map((list) => list.id).includes(newList.id)).concat(lists),
+    })),
   updateList: (updatedList: List) => {
     set(({ lists }) => ({ lists: lists.map((list) => (list.id === updatedList.id ? updatedList : list)) }));
   },
@@ -18,9 +21,7 @@ export const store = create<Store>((set, get) => ({
   getTask: (taskId: string) => get().tasks.find((task) => task.id === taskId)!,
   addTasks: (newTasks: Task[]) => {
     set(({ tasks }) => ({
-      tasks: tasks
-        .filter((storeTask) => !newTasks.map((newTask) => newTask.id).includes(storeTask.id))
-        .concat(newTasks),
+      tasks: [...newTasks].filter((newTask) => !tasks.map((task) => task.id).includes(newTask.id)).concat(tasks),
     }));
     set(({ lists }) => ({
       lists: lists.map((list) => ({ ...list, task: get().getTasks(list.id).length })),
