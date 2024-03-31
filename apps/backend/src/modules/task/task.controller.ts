@@ -51,6 +51,11 @@ export class TaskController {
   @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiParam({
+    name: "listId",
+    example: "clu1q9zal000508l0cmq7b24e ",
+    description: "Specify the Id of the list for which you want to retrieve tasks.",
+  })
+  @ApiParam({
     name: "id",
     example: "clu1qbwq6000608l016lme5b0 ",
     description: "Specify the Id of the task for which you want to retrieve the history.",
@@ -69,6 +74,11 @@ export class TaskController {
   @ApiOkResponse({ type: ResponseTaskDto, description: responseStatus["success"] })
   @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiParam({
+    name: "listId",
+    example: "clu1q9zal000508l0cmq7b24e ",
+    description: "Specify the Id of the list for which you want to retrieve tasks.",
+  })
   @ApiParam({
     name: "id",
     example: "clu1qdgea000708l097xq1jb9 ",
@@ -109,6 +119,11 @@ export class TaskController {
   @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiBody({ type: PatchTaskDto })
   @ApiParam({
+    name: "listId",
+    example: "clu1q9zal000508l0cmq7b24e ",
+    description: "Specify the Id of the list for which you want to retrieve tasks.",
+  })
+  @ApiParam({
     name: "id",
     example: "clu1qhhuj000908l0bt4j5u3l ",
     description: "Specify the Id of the task for which you want to modify.",
@@ -127,6 +142,11 @@ export class TaskController {
   @ApiOkResponse({ description: responseStatus["success"] })
   @ApiBadRequestResponse({ type: FallbackResponse, description: responseStatus["error"] })
   @ApiInternalServerErrorResponse({ type: FallbackResponse, description: responseStatus["error"] })
+  @ApiParam({
+    name: "listId",
+    example: "clu1q9zal000508l0cmq7b24e ",
+    description: "Specify the Id of the list for which you want to retrieve tasks.",
+  })
   @ApiParam({
     name: "id",
     example: "clu1qiv97000a08l0e1185dzw ",
