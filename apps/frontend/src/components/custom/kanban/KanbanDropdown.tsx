@@ -58,21 +58,21 @@ const KanbanDropdown = (props: { list: List }) => {
             <DropdownMenuItem
               onClick={() => {
                 setListId(list.id);
-                setOpenEditList(!openEditList);
-              }}
-            >
-              <IconEdit stroke={1.5} size={16} className="mr-2" />
-              <span>Edit</span>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem
-              onClick={() => {
-                setListId(list.id);
                 setOpenNewTask(!openNewTask);
               }}
             >
               <IconPlus stroke={1.5} size={16} className="mr-2" />
               <span>Add new task</span>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem
+              onClick={() => {
+                setListId(list.id);
+                setOpenEditList(!openEditList);
+              }}
+            >
+              <IconEdit stroke={1.5} size={16} className="mr-2" />
+              <span>Edit</span>
             </DropdownMenuItem>
 
             <DropdownMenuItem className="text-[#ED4245]" onClick={() => deleteList(list.id)}>
