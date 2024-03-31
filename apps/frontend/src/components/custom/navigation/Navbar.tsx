@@ -31,8 +31,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      <History open={showHistory} close={() => setShowHistory(false)} />
-      <CreateList open={openNewList} close={() => setOpenNewList(false)} />
+      <History open={showHistory} close={() => setShowHistory(!showHistory)} />
+      <CreateList open={openNewList} close={() => setOpenNewList(!openNewList)} />
     </div>
   );
 };

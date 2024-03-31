@@ -36,7 +36,7 @@ const TaskDropdown = (props: { task: Task }) => {
     }
 
     if (!error) {
-      toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+      toast({ title: "Something went wrong", description: "Please try again later 😭", variant: "destructive" });
 
       return;
     }
@@ -81,10 +81,16 @@ const TaskDropdown = (props: { task: Task }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <EditTask open={openEditTask} close={() => setOpenEditTask(false)} />
+      <EditTask
+        open={openEditTask}
+        close={() => setOpenEditTask(!openEditTask)}
+        taskId={task.id}
+        listId={task.listId}
+      />
+
       <TaskHistory
         open={openHistoryTask}
-        close={() => setOpenHistoryTask(false)}
+        close={() => setOpenHistoryTask(!openHistoryTask)}
         taskId={task.id}
         listId={task.listId}
       />

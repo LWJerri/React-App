@@ -9,7 +9,7 @@ import { Button } from "../../ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../ui/dialog";
 import { Input } from "../../ui/input";
 
-const FormSchema = z.object({
+const EditListSchema = z.object({
   name: z.string().trim().min(3).max(20),
 });
 
@@ -20,11 +20,10 @@ const EditList = (props: { open: boolean; close: () => void; listId: string }) =
 
   const getList = store((state) => state.getList(listId));
   const updateList = store((state) => state.updateList);
-  const resetStore = store((state) => state.reset);
 
-  const form = useForm<z.infer<typeof FormSchema>>({ resolver: zodResolver(FormSchema), mode: "onChange" });
+  const form = useForm<z.infer<typeof EditListSchema>>({ resolver: zodResolver(EditListSchema), mode: "onChange" });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof EditListSchema>) {
     const request = await api.PATCH("/api/lists/{id}", { body: data, params: { path: { id: getList.id } } });
 
     if (request.data) {
@@ -34,18 +33,17 @@ const EditList = (props: { open: boolean; close: () => void; listId: string }) =
         title: "List updated",
         description: (
           <p>
-            List name successfully updated to <b>{data.name}</b>.
+            List name updated to <b>{data.name}</b>.
           </p>
         ),
       });
 
       updateList(data);
-      resetStore();
 
       close();
     } else {
       if (!request.error) {
-        toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+        toast({ title: "Something went wrong", description: "Please try again later 😭", variant: "destructive" });
 
         return;
       }
@@ -68,7 +66,7 @@ const EditList = (props: { open: boolean; close: () => void; listId: string }) =
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-4">
             <div>
               <FormField
                 control={form.control}
@@ -81,6 +79,7 @@ const EditList = (props: { open: boolean; close: () => void; listId: string }) =
                       defaultValue={getList.name}
                       onInput={field.onChange}
                       onChange={() => field.value}
+                      autoFocus
                     />
                     <FormMessage className="font-normal" />
                   </FormItem>

@@ -9,7 +9,7 @@ import { z } from "zod";
 import { Button } from "../../ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../ui/dialog";
 
-const FormSchema = z.object({
+const CreateListSchema = z.object({
   name: z.string().trim().min(3).max(20),
 });
 
@@ -18,12 +18,11 @@ const CreateList = (props: { open: boolean; close: () => void }) => {
 
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof FormSchema>>({ resolver: zodResolver(FormSchema), mode: "onChange" });
+  const form = useForm<z.infer<typeof CreateListSchema>>({ resolver: zodResolver(CreateListSchema), mode: "onChange" });
 
-  const addList = store((state) => state.addList);
-  const resetStore = store((state) => state.reset);
+  const addLists = store((state) => state.addLists);
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof CreateListSchema>) {
     const request = await api.POST("/api/lists", { body: data });
 
     if (request.data) {
@@ -33,18 +32,17 @@ const CreateList = (props: { open: boolean; close: () => void }) => {
         title: "List created",
         description: (
           <p>
-            List with name <b>{data.name}</b> successfully created.
+            List <b>{data.name}</b> successfully created.
           </p>
         ),
       });
 
-      addList(data);
-      resetStore();
+      addLists([{ ...data, task: 0 }]);
 
       close();
     } else {
       if (!request.error) {
-        toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+        toast({ title: "Something went wrong", description: "Please try again later 😭", variant: "destructive" });
 
         return;
       }
@@ -67,7 +65,7 @@ const CreateList = (props: { open: boolean; close: () => void }) => {
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-4">
             <div>
               <FormField
                 control={form.control}
@@ -77,9 +75,10 @@ const CreateList = (props: { open: boolean; close: () => void }) => {
                     <FormLabel className="font-normal">Name</FormLabel>
                     <Input
                       type="text"
-                      placeholder="Type list name here..."
+                      placeholder="List name"
                       onInput={field.onChange}
                       onChange={() => field.value}
+                      autoFocus
                     />
                     <FormMessage className="font-normal" />
                   </FormItem>

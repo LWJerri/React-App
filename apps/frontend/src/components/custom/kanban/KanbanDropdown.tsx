@@ -19,7 +19,6 @@ const KanbanDropdown = (props: { list: List }) => {
   const [openNewTask, setOpenNewTask] = useState(false);
 
   const removeList = store((state) => state.removeList);
-  const setListId = store((state) => state.setListId);
 
   async function deleteList(listId: string) {
     const { error, data } = await api.DELETE("/api/lists/{id}", { params: { path: { id: listId } } });
@@ -33,7 +32,7 @@ const KanbanDropdown = (props: { list: List }) => {
     }
 
     if (!error) {
-      toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+      toast({ title: "Something went wrong", description: "Please try again later 😭", variant: "destructive" });
 
       return;
     }
@@ -55,22 +54,12 @@ const KanbanDropdown = (props: { list: List }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuGroup>
-            <DropdownMenuItem
-              onClick={() => {
-                setListId(list.id);
-                setOpenNewTask(!openNewTask);
-              }}
-            >
+            <DropdownMenuItem onClick={() => setOpenNewTask(!openNewTask)}>
               <IconPlus stroke={1.5} size={16} className="mr-2" />
               <span>Add new task</span>
             </DropdownMenuItem>
 
-            <DropdownMenuItem
-              onClick={() => {
-                setListId(list.id);
-                setOpenEditList(!openEditList);
-              }}
-            >
+            <DropdownMenuItem onClick={() => setOpenEditList(!openEditList)}>
               <IconEdit stroke={1.5} size={16} className="mr-2" />
               <span>Edit</span>
             </DropdownMenuItem>
@@ -83,8 +72,8 @@ const KanbanDropdown = (props: { list: List }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <EditList open={openEditList} close={() => setOpenEditList(false)} listId={list.id} />
-      <CreateTask open={openNewTask} close={() => setOpenNewTask(false)} listId={list.id} />
+      <EditList open={openEditList} close={() => setOpenEditList(!openEditList)} listId={list.id} />
+      <CreateTask open={openNewTask} close={() => setOpenNewTask(!openNewTask)} listId={list.id} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const KanbanTaskButton = (props: { listId: string }) => {
         </div>
       </div>
 
-      <CreateTask open={openNewTask} close={() => setOpenNewTask(false)} listId={listId} />
+      <CreateTask open={openNewTask} close={() => setOpenNewTask(!openNewTask)} listId={listId} />
     </div>
   );
 };

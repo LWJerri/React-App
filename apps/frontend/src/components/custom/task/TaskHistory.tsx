@@ -26,7 +26,7 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
         if (data) return setHistory(data);
 
         if (!error) {
-          toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+          toast({ title: "Something went wrong", description: "Please try again later 😭", variant: "destructive" });
 
           return;
         }

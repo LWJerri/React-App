@@ -11,9 +11,9 @@ import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
-import ListSelector from "../selectors/ListSelector";
 import TaskDropdown from "../task/TaskDropdown";
 import TaskSkeleton from "../task/TaskSkeleton";
+import KanbanTaskMove from "./KanbanTaskMove";
 
 const KanbanTask = (props: { listId: string }) => {
   const { listId } = props;
@@ -25,16 +25,16 @@ const KanbanTask = (props: { listId: string }) => {
   const tasks = store((state) => state.getTasks(listId));
   const { task: tasksCount } = store((state) => state.getList(listId));
 
-  const loadTasksToStore = store((state) => state.loadTasks);
+  const addTasksToStore = store((state) => state.addTasks);
 
   useEffect(() => {
     api
       .GET("/api/lists/{listId}/tasks", { params: { path: { listId } } })
       .then(({ data, error }) => {
-        if (data) return loadTasksToStore(data);
+        if (data) return addTasksToStore(data);
 
         if (!error) {
-          toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+          toast({ title: "Something went wrong", description: "Please try again later 😭", variant: "destructive" });
 
           return;
         }
@@ -45,13 +45,13 @@ const KanbanTask = (props: { listId: string }) => {
           variant: "destructive",
         });
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(!loading));
   }, []);
 
   return (
     <div className="grid gap-4">
       {loading &&
-        [...Array(tasksCount > 10 ? 10 : tasksCount)].map((_, i) => (
+        [...Array(tasksCount > 5 ? 5 : tasksCount)].map((_, i) => (
           <div key={i}>
             <TaskSkeleton />
           </div>
@@ -94,7 +94,7 @@ const KanbanTask = (props: { listId: string }) => {
                   </Badge>
                 </div>
 
-                <ListSelector placeholder="Move to..." immediatelyMove={true} taskId={task.id} listId={task.listId} />
+                <KanbanTaskMove taskId={task.id} />
               </div>
             </CardFooter>
           </Card>
