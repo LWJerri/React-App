@@ -46,7 +46,7 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
           <DialogTitle>Task History</DialogTitle>
         </DialogHeader>
 
-        <div className="grid gap-2">
+        <div className="grid gap-2 overflow-y-auto">
           {history.length > 0 &&
             history.map((item, i) => (
               <Alert key={i}>
