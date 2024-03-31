@@ -16,13 +16,13 @@ const App = () => {
 
   const lists = store((state) => state.getLists());
 
-  const loadListsToStore = store((state) => state.loadLists);
+  const addListsToStore = store((state) => state.addLists);
 
   useEffect(() => {
     api
       .GET("/api/lists")
       .then(({ data, error }) => {
-        if (data) return loadListsToStore(data);
+        if (data) return addListsToStore(data);
 
         if (!error) {
           toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
