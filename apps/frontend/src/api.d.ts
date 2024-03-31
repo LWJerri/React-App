@@ -91,13 +91,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-31T13:24:25.048Z
+       * @example 2024-03-31T16:34:37.155Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-31T13:24:25.048Z
+       * @example 2024-03-31T16:34:37.155Z
        */
       updatedAt: string;
       /**
@@ -141,13 +141,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-31T13:24:25.048Z
+       * @example 2024-03-31T16:34:37.155Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-31T13:24:25.048Z
+       * @example 2024-03-31T16:34:37.155Z
        */
       updatedAt: string;
     };
@@ -172,13 +172,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-03-31T13:24:25.048Z
+       * @example 2024-03-31T16:34:37.155Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-03-31T13:24:25.048Z
+       * @example 2024-03-31T16:34:37.155Z
        */
       updatedAt: string;
       /**
@@ -206,7 +206,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The time by which the task must be completed.
-       * @example 2024-03-31T13:24:25.049Z
+       * @example 2024-03-31T16:34:37.156Z
        */
       dueAt: string;
       /**
@@ -218,13 +218,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the task was created.
-       * @example 2024-03-31T13:24:25.049Z
+       * @example 2024-03-31T16:34:37.156Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the task was updated.
-       * @example 2024-03-31T13:24:25.049Z
+       * @example 2024-03-31T16:34:37.156Z
        */
       updatedAt: string;
       /**
@@ -254,7 +254,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-31T13:24:25.049Z
+       * @example 2024-03-31T16:34:37.157Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -275,7 +275,7 @@ export interface components {
       description: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-31T13:24:25.165Z
+       * @example 2024-03-31T16:34:37.167Z
        */
       dueAt: string;
       /**
@@ -298,7 +298,7 @@ export interface components {
       description?: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-03-31T13:24:25.165Z
+       * @example 2024-03-31T16:34:37.167Z
        */
       dueAt?: string;
       /**
@@ -334,7 +334,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-03-31T13:24:25.049Z
+       * @example 2024-03-31T16:34:37.157Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -728,6 +728,20 @@ export interface operations {
    * @description This request will return the entire history of actions on lists and tasks.
    */
   AuditController_getAudit: {
+    parameters: {
+      query: {
+        /**
+         * @description How many records need to skip.
+         * @example 1
+         */
+        offset: number;
+        /**
+         * @description How many records to return.
+         * @example 50
+         */
+        limit: number;
+      };
+    };
     responses: {
       /** @description Response when the request is successfully processed. */
       200: {
