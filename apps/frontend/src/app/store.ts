@@ -29,15 +29,34 @@ export const store = create<Store>((set, get) => ({
     set(({ tasks }) => ({
       tasks: tasks.filter((st) => !newTasks.map((nt) => nt.id).includes(st.id)).concat(newTasks),
     })),
-  addTask: (task: Task) => set(({ tasks }) => ({ tasks: [task, ...tasks] })),
+  addTask: (task: Task) => {
+    set(({ tasks }) => ({ tasks: [task, ...tasks] }));
+    set(({ lists }) => ({
+      lists: lists.map((list) => ({ ...list, task: get().getTasks(list.id).length })),
+    }));
+  },
   updateTask: (newTask: Task) => {
     set(({ tasks }) => ({
       tasks: tasks
         .map((task) => (task.id === newTask.id ? newTask : task))
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+        .sort((a, b) => {
+          const timeA = new Date(a.createdAt).getTime();
+          const timeB = new Date(b.createdAt).getTime();
+
+          return timeB - timeA;
+        }),
+    }));
+
+    set(({ lists }) => ({
+      lists: lists.map((list) => ({ ...list, task: get().getTasks(list.id).length })),
     }));
   },
-  removeTask: (taskId) => set(({ tasks }) => ({ tasks: tasks.filter((task) => task.id !== taskId) })),
+  removeTask: (taskId) => {
+    set(({ tasks }) => ({ tasks: tasks.filter((task) => task.id !== taskId) }));
+    set(({ lists }) => ({
+      lists: lists.map((list) => ({ ...list, task: get().getTasks(list.id).length })),
+    }));
+  },
 
   reset: () => set({ listId: "", priority: Priority.LOW }),
 }));
