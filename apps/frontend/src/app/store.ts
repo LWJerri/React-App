@@ -29,7 +29,10 @@ export const store = create<Store>((set, get) => ({
 
   tasks: [],
   getTasks: (listId: string) => get().tasks.filter((task) => task.listId === listId),
-  loadTasks: (tasks: Task[]) => set(() => ({ tasks })),
+  loadTasks: (newTasks: Task[]) =>
+    set(({ tasks }) => ({
+      tasks: tasks.filter((st) => !newTasks.map((nt) => nt.id).includes(st.id)).concat(newTasks),
+    })),
   addTask: (task: Task) => set(({ tasks }) => ({ tasks: [task, ...tasks] })),
   updateTask: (newTask: Task) => {
     set(({ tasks }) => ({ tasks: tasks.map((task) => (task.id === newTask.id ? newTask : task)) }));
