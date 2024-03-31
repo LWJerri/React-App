@@ -13,7 +13,6 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
 
   const { toast } = useToast();
 
-  const [loading, setLoading] = useState(true);
   const [history, setHistory] = useState<History[]>([]);
 
   const getList = store((state) => state.getList);
@@ -37,8 +36,7 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
           description: typeof error.message === "string" ? error.message : error.message.join(", "),
           variant: "destructive",
         });
-      })
-      .finally(() => setLoading(!loading));
+      });
   }, [open]);
 
   return (
@@ -49,8 +47,7 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
         </DialogHeader>
 
         <div className="grid gap-2">
-          {!loading &&
-            history.length > 0 &&
+          {history.length > 0 &&
             history.map((item, i) => (
               <Alert key={i}>
                 <AlertDescription className="flex justify-between space-x-2">
