@@ -35,8 +35,6 @@ const EditTask = (props: { open: boolean; close: () => void; listId: string; tas
   const [openPrioritySelector, setOpenPrioritySelector] = useState(false);
   const [openListSelector, setOpenListSelector] = useState(false);
 
-  const getTask = store((state) => state.getTask(taskId));
-
   const form = useForm<z.infer<typeof EditTaskSchema>>({ resolver: zodResolver(EditTaskSchema), mode: "onChange" });
 
   useEffect(() => form.reset(), [open]);
@@ -108,7 +106,7 @@ const EditTask = (props: { open: boolean; close: () => void; listId: string; tas
                       <FormLabel className="font-normal">Name</FormLabel>
                       <Input
                         type="text"
-                        defaultValue={getTask.name}
+                        defaultValue={retrieveTask.name}
                         onInput={field.onChange}
                         onChange={() => field.value}
                       />
@@ -126,7 +124,7 @@ const EditTask = (props: { open: boolean; close: () => void; listId: string; tas
                     <FormItem className="flex flex-col">
                       <FormLabel className="font-normal">Description</FormLabel>
                       <Textarea
-                        defaultValue={getTask.description}
+                        defaultValue={retrieveTask.description}
                         onInput={field.onChange}
                         onChange={() => field.value}
                       />
@@ -141,7 +139,7 @@ const EditTask = (props: { open: boolean; close: () => void; listId: string; tas
                 <FormField
                   control={form.control}
                   name="dueAt"
-                  defaultValue={new Date(getTask.dueAt)}
+                  defaultValue={new Date(retrieveTask.dueAt)}
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel className="font-normal">Deadline</FormLabel>
@@ -179,7 +177,7 @@ const EditTask = (props: { open: boolean; close: () => void; listId: string; tas
                 <FormField
                   control={form.control}
                   name="listId"
-                  defaultValue={getTask.listId}
+                  defaultValue={retrieveTask.listId}
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel className="font-normal">Status</FormLabel>
@@ -232,7 +230,7 @@ const EditTask = (props: { open: boolean; close: () => void; listId: string; tas
                 <FormField
                   control={form.control}
                   name="priority"
-                  defaultValue={Priority[getTask.priority]}
+                  defaultValue={Priority[retrieveTask.priority]}
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel className="font-normal">Priority</FormLabel>
