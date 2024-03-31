@@ -1,4 +1,5 @@
 import api from "@/app/api";
+import { store } from "@/app/store";
 import { History as HistoryType } from "@/types/History";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -13,6 +14,8 @@ const History = (props: { open: boolean; close: () => void }) => {
   const { toast } = useToast();
 
   const [history, setHistory] = useState<HistoryType[]>([]);
+
+  const getList = store((state) => state.getList);
 
   useEffect(() => {
     if (!open) return;
@@ -70,6 +73,22 @@ const History = (props: { open: boolean; close: () => void }) => {
                       You edit {item.relatedModel.toLowerCase()} {item.affectedField} from {/* @ts-ignore */}
                       <b>{format(item.oldState[item.affectedField], "dd.MM.yyyy")}</b> to {/* @ts-ignore */}
                       <b>{format(item.newState[item.affectedField], "dd.MM.yyyy")}</b>
+                    </p>
+                  )}
+
+                  {item.action === "EDIT" && item.affectedField === "listId" && (
+                    <p>
+                      You edit {item.relatedModel.toLowerCase()} {item.affectedField} from
+                      <b>
+                        {" "}
+                        {/* @ts-ignore */}
+                        {getList(item.oldState[item.affectedField])?.name ?? item.oldState[item.affectedField]}
+                      </b>{" "}
+                      to{" "}
+                      <b>
+                        {/* @ts-ignore */}
+                        {getList(item.newState[item.affectedField])?.name ?? item.newState[item.affectedField]}
+                      </b>
                     </p>
                   )}
                   <p className="flex-none">{format(item.createdAt, "dd.MM.yyyy")}</p>

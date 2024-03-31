@@ -1,4 +1,5 @@
 import api from "@/app/api";
+import { store } from "@/app/store";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
@@ -14,6 +15,8 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
 
   const [loading, setLoading] = useState(true);
   const [history, setHistory] = useState<History[]>([]);
+
+  const getList = store((state) => state.getList);
 
   useEffect(() => {
     if (!open) return;
@@ -63,7 +66,7 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
                     </p>
                   )}
 
-                  {item.action === "EDIT" && item.affectedField !== "dueAt" && (
+                  {item.action === "EDIT" && item.affectedField !== "dueAt" && item.affectedField !== "listId" && (
                     <p>
                       You edit {item.relatedModel.toLowerCase()} {item.affectedField} from {/* @ts-ignore */}
                       <b>{item.oldState[item.affectedField]}</b> to <b>{item.newState[item.affectedField]}</b>
@@ -75,6 +78,22 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
                       You edit {item.relatedModel.toLowerCase()} {item.affectedField} from {/* @ts-ignore */}
                       <b>{format(item.oldState[item.affectedField], "dd.MM.yyyy")}</b> to {/* @ts-ignore */}
                       <b>{format(item.newState[item.affectedField], "dd.MM.yyyy")}</b>
+                    </p>
+                  )}
+
+                  {item.action === "EDIT" && item.affectedField === "listId" && (
+                    <p>
+                      You edit {item.relatedModel.toLowerCase()} {item.affectedField} from
+                      <b>
+                        {" "}
+                        {/* @ts-ignore */}
+                        {getList(item.oldState[item.affectedField])?.name ?? item.oldState[item.affectedField]}
+                      </b>{" "}
+                      to{" "}
+                      <b>
+                        {/* @ts-ignore */}
+                        {getList(item.newState[item.affectedField])?.name ?? item.newState[item.affectedField]}
+                      </b>
                     </p>
                   )}
                   <p className="flex-none">{format(item.createdAt, "dd.MM.yyyy")}</p>
