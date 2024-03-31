@@ -82,7 +82,12 @@ const TaskDropdown = (props: { task: Task }) => {
       </DropdownMenu>
 
       <EditTask open={openEditTask} close={() => setOpenEditTask(false)} />
-      <TaskHistory open={openHistoryTask} close={() => setOpenHistoryTask(false)} />
+      <TaskHistory
+        open={openHistoryTask}
+        close={() => setOpenHistoryTask(false)}
+        taskId={task.id}
+        listId={task.listId}
+      />
       <TaskModalView task={task} open={showModal} close={() => setShowModal(!showModal)} />
     </div>
   );
