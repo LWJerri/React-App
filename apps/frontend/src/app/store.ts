@@ -9,10 +9,6 @@ export const store = create<Store>((set, get) => ({
   getListId: () => get().listId,
   setListId: (listId: string) => set(() => ({ listId })),
 
-  dueAt: "",
-  getDueAt: () => get().dueAt,
-  setDueAt: (dueAt: string) => set(() => ({ dueAt })),
-
   priority: Priority.LOW,
   getPriority: () => get().priority,
   setPriority: (value: Priority) => set(() => ({ priority: value })),
@@ -39,5 +35,5 @@ export const store = create<Store>((set, get) => ({
   },
   removeTask: (taskId) => set(({ tasks }) => ({ tasks: tasks.filter((task) => task.id !== taskId) })),
 
-  reset: () => set({ listId: "", dueAt: "", priority: Priority.LOW }),
+  reset: () => set({ listId: "", priority: Priority.LOW }),
 }));

@@ -7,10 +7,6 @@ export interface Store {
   getListId: () => string;
   setListId: (listId: string) => void;
 
-  dueAt: string;
-  getDueAt: () => string;
-  setDueAt: (dueAt: string) => void;
-
   priority: Priority;
   getPriority: () => Priority;
   setPriority: (priority: Priority) => void;
