@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconCalendarDue } from "@tabler/icons-react";
 import { format } from "date-fns";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "../../ui/dialog";
@@ -29,6 +30,8 @@ const CreateTask = (props: { open: boolean; close: () => void; listId: string })
   const { open, close, listId } = props;
 
   const { toast } = useToast();
+
+  const [openDateSelector, setOpenDateSelector] = useState(false);
 
   const form = useForm<z.infer<typeof CreateTaskSchema>>({ resolver: zodResolver(CreateTaskSchema), mode: "onChange" });
 
@@ -126,18 +129,27 @@ const CreateTask = (props: { open: boolean; close: () => void; listId: string })
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel className="font-normal">Due At</FormLabel>
-                  <Popover>
+                  <Popover open={openDateSelector} onOpenChange={setOpenDateSelector}>
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
                         className={cn("pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
+                        onClick={() => setOpenDateSelector(!openDateSelector)}
                       >
                         {field.value ? format(field.value, "dd.MM.yyyy") : <span>Pick a date</span>}
                         <IconCalendarDue stroke={1.5} size={16} className="ml-auto opacity-50" />
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={(value) => {
+                          field.onChange(value);
+                          setOpenDateSelector(!openDateSelector);
+                        }}
+                        initialFocus
+                      />
                     </PopoverContent>
                   </Popover>
                   <FormMessage className="font-normal" />
