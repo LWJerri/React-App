@@ -19,24 +19,23 @@ const App = () => {
   const addListsToStore = store((state) => state.addLists);
 
   useEffect(() => {
-    api
-      .GET("/api/lists")
-      .then(({ data, error }) => {
-        if (data) return addListsToStore(data);
+    api.GET("/api/lists").then(({ data, error }) => {
+      setLoading(!loading);
 
-        if (!error) {
-          toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+      if (data) return addListsToStore(data);
 
-          return;
-        }
+      if (!error) {
+        toast({ title: "Something went wrong", description: "Please try again later 😭", variant: "destructive" });
 
-        toast({
-          title: error.error ?? "Something went wrong",
-          description: typeof error.message === "string" ? error.message : error.message.join(", "),
-          variant: "destructive",
-        });
-      })
-      .finally(() => setLoading(!loading));
+        return;
+      }
+
+      toast({
+        title: error.error ?? "Something went wrong",
+        description: typeof error.message === "string" ? error.message : error.message.join(", "),
+        variant: "destructive",
+      });
+    });
   }, []);
 
   return (
