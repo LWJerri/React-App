@@ -22,9 +22,7 @@ const EditList = (props: { open: boolean; close: () => void; listId: string }) =
   const updateList = store((state) => state.updateList);
   const resetStore = store((state) => state.reset);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
+  const form = useForm<z.infer<typeof FormSchema>>({ resolver: zodResolver(FormSchema) });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const request = await api.PATCH("/api/lists/{id}", { body: data, params: { path: { id: getList.id } } });

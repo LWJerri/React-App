@@ -18,9 +18,7 @@ const CreateList = (props: { open: boolean; close: () => void }) => {
 
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
+  const form = useForm<z.infer<typeof FormSchema>>({ resolver: zodResolver(FormSchema) });
 
   const addList = store((state) => state.addList);
   const resetStore = store((state) => state.reset);
