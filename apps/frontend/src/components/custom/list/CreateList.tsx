@@ -67,7 +67,7 @@ const CreateList = (props: { open: boolean; close: () => void }) => {
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between">
             <div>
               <FormField
                 control={form.control}

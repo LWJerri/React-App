@@ -88,83 +88,93 @@ const CreateTask = (props: { open: boolean; close: () => void; listId: string })
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel className="font-normal">Name</FormLabel>
-                  <Input
-                    type="text"
-                    placeholder="Type task name here..."
-                    onInput={field.onChange}
-                    onChange={() => field.value}
-                  />
-                  <FormMessage className="font-normal" />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel className="font-normal">Description</FormLabel>
-                  <Textarea
-                    placeholder="Type description here..."
-                    onInput={field.onChange}
-                    onChange={() => field.value}
-                  />
-                  <p className="muted">Markdown support enabled.</p>
-                  <FormMessage className="font-normal" />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="dueAt"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel className="font-normal">Due At</FormLabel>
-                  <Popover open={openDateSelector} onOpenChange={setOpenDateSelector}>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className={cn("pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
-                        onClick={() => setOpenDateSelector(!openDateSelector)}
-                      >
-                        {field.value ? format(field.value, "dd.MM.yyyy") : <span>Pick a date</span>}
-                        <IconCalendarDue stroke={1.5} size={16} className="ml-auto opacity-50" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={(value) => {
-                          field.onChange(value);
-                          setOpenDateSelector(!openDateSelector);
-                        }}
-                        initialFocus
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col justify-between">
+            <div className="flex flex-col space-y-4">
+              <div>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel className="font-normal">Name</FormLabel>
+                      <Input
+                        type="text"
+                        placeholder="Type task name here..."
+                        onInput={field.onChange}
+                        onChange={() => field.value}
                       />
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage className="font-normal" />
-                </FormItem>
-              )}
-            />
+                      <FormMessage className="font-normal" />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-            <div className="grid w-full items-center gap-1.5">
-              <Label>Priority</Label>
-              <PrioritySelector />
+              <div>
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel className="font-normal">Description</FormLabel>
+                      <Textarea
+                        placeholder="Type description here..."
+                        onInput={field.onChange}
+                        onChange={() => field.value}
+                      />
+                      <p className="muted">Markdown support enabled.</p>
+                      <FormMessage className="font-normal" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div>
+                <FormField
+                  control={form.control}
+                  name="dueAt"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel className="font-normal">Due At</FormLabel>
+                      <Popover open={openDateSelector} onOpenChange={setOpenDateSelector}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant={"outline"}
+                            className={cn("pl-3 text-left font-normal", !field.value && "text-muted-foreground")}
+                            onClick={() => setOpenDateSelector(!openDateSelector)}
+                          >
+                            {field.value ? format(field.value, "dd.MM.yyyy") : <span>Pick a date</span>}
+                            <IconCalendarDue stroke={1.5} size={16} className="ml-auto opacity-50" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={(value) => {
+                              field.onChange(value);
+                              setOpenDateSelector(!openDateSelector);
+                            }}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage className="font-normal" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid w-full items-center gap-1.5">
+                <Label>Priority</Label>
+                <PrioritySelector />
+              </div>
             </div>
 
-            <DialogFooter>
-              <Button type="submit">Create</Button>
-            </DialogFooter>
+            <div>
+              <DialogFooter>
+                <Button type="submit">Create</Button>
+              </DialogFooter>
+            </div>
           </form>
         </Form>
       </DialogContent>
