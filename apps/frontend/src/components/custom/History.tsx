@@ -48,7 +48,7 @@ const History = (props: { open: boolean; close: () => void }) => {
           {history.length > 0 &&
             history.map((item, i) => (
               <Alert key={i}>
-                <AlertDescription className="flex justify-between space-x-2">
+                <AlertDescription className="flex flex-col justify-between space-y-2 break-all sm:flex-row sm:space-x-2 sm:space-y-0">
                   {item.action === "CREATE" && (
                     <p>
                       You create a new {item.relatedModel.toLowerCase()} <b>{item.newState.name}</b>
@@ -86,7 +86,7 @@ const History = (props: { open: boolean; close: () => void }) => {
                       {getList(item.newState[item.affectedField])?.name ?? item.newState[item.affectedField]}
                     </p>
                   )}
-                  <p className="flex-none">{format(item.createdAt, "dd.MM.yyyy")}</p>
+                  <p className="flex-none text-right sm:text-left">{format(item.createdAt, "dd.MM.yyyy")}</p>
                 </AlertDescription>
               </Alert>
             ))}
