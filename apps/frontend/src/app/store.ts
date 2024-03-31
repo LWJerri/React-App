@@ -31,7 +31,11 @@ export const store = create<Store>((set, get) => ({
     })),
   addTask: (task: Task) => set(({ tasks }) => ({ tasks: [task, ...tasks] })),
   updateTask: (newTask: Task) => {
-    set(({ tasks }) => ({ tasks: tasks.map((task) => (task.id === newTask.id ? newTask : task)) }));
+    set(({ tasks }) => ({
+      tasks: tasks
+        .map((task) => (task.id === newTask.id ? newTask : task))
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    }));
   },
   removeTask: (taskId) => set(({ tasks }) => ({ tasks: tasks.filter((task) => task.id !== taskId) })),
 
