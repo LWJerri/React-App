@@ -14,6 +14,7 @@ const History = (props: { open: boolean; close: () => void }) => {
   const { toast } = useToast();
 
   const [history, setHistory] = useState<HistoryType[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const getList = store((state) => state.getList);
 
@@ -21,6 +22,8 @@ const History = (props: { open: boolean; close: () => void }) => {
     if (!open) return;
 
     api.GET("/api/audit").then(({ data, error }) => {
+      setLoading(false);
+
       if (data) return setHistory(data);
 
       if (!error) {
@@ -91,7 +94,7 @@ const History = (props: { open: boolean; close: () => void }) => {
               </Alert>
             ))}
 
-          {!history.length &&
+          {loading &&
             [...Array(6)].map((_, i) => (
               <div className="rounded-lg border p-4" key={i}>
                 <div className="[&amp;_p]:leading-relaxed">
