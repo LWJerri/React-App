@@ -131,9 +131,6 @@ importers:
       date-fns:
         specifier: 3.6.0
         version: 3.6.0
-      dotenv:
-        specifier: 16.4.5
-        version: 16.4.5
       openapi-fetch:
         specifier: 0.9.3
         version: 0.9.3
