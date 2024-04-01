@@ -45,6 +45,8 @@ services:
 networks:
   caddy:
     external: true
+  db:
+    external: true
   task:
 
 volumes:
