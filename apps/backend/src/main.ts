@@ -26,7 +26,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, options);
 
-  await Promise.all([app.listen(appPort), RedocModule.setup("/", app, document, {})]);
+  await Promise.all([app.listen(appPort, "0.0.0.0"), RedocModule.setup("/", app, document, {})]);
 
   logger.log(`🚀 API ready on ${appPort} port.`);
 }
