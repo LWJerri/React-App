@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     networks:
-      - db
+      - task
     volumes:
       - postgres_db:/var/lib/postgresql/data
 
@@ -20,7 +20,7 @@ services:
       - PORT=${PORT}
       - DATABASE_URL=${DATABASE_URL}
     networks:
-      - db
+      - task
       - caddy
     depends_on:
       - postgres
@@ -35,6 +35,7 @@ services:
       - API_URL=${API_URL}
     networks:
       - caddy
+      - task
     depends_on:
       - backend
     labels:
@@ -44,8 +45,7 @@ services:
 networks:
   caddy:
     external: true
-  db:
-    external: true
+  task:
 
 volumes:
   postgres_db:
