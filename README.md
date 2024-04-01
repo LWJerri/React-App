@@ -17,7 +17,7 @@ React ToDO Kanban PoC for Radency.
 
 ### With Docker
 
-1. Run `docker-compose up --build --force-recreate -d`.
+1. Run `docker-compose up --build -d`.
 
 ## License
 
