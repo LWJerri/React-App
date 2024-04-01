@@ -1,12 +1,13 @@
 {
   "name": "task-manager",
   "version": "1.0.0",
-  "description": "React kanban PoC implementation for Radency.",
+  "description": "React ToDO Kanban PoC for Radency.",
   "type": "module",
   "scripts": {
     "backend:build": "pnpm -F @task-manager/backend build",
     "backend:start": "pnpm -F @task-manager/backend start",
     "backend:dev": "pnpm -F @task-manager/backend dev",
+    "frontend:preview": "pnpm -F @task-manager/frontend preview",
     "frontend:build": "pnpm -F @task-manager/frontend build",
     "frontend:dev": "pnpm -F @task-manager/frontend dev",
     "frontend:sync": "pnpm -F @task-manager/frontend sync"
