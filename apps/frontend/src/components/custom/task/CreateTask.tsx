@@ -44,7 +44,7 @@ const CreateTask = (props: { open: boolean; close: () => void; listId: string })
   async function onSubmit(data: z.infer<typeof CreateTaskSchema>) {
     const { dueAt, ...fields } = data;
 
-    const request = await api.POST("/api/lists/{listId}/tasks", {
+    const request = await api.POST("/lists/{listId}/tasks", {
       body: { dueAt: new Date(dueAt).toISOString(), ...fields },
       params: { path: { listId } },
     });

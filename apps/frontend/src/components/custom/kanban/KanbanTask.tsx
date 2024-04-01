@@ -29,7 +29,7 @@ const KanbanTask = (props: { listId: string }) => {
 
   useEffect(() => {
     api
-      .GET("/api/lists/{listId}/tasks", { params: { path: { listId } } })
+      .GET("/lists/{listId}/tasks", { params: { path: { listId } } })
       .then(({ data, error }) => {
         if (data) return addTasksToStore(data);
 

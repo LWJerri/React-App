@@ -21,7 +21,7 @@ const KanbanDropdown = (props: { list: List }) => {
   const removeList = store((state) => state.removeList);
 
   async function deleteList(listId: string) {
-    const { error, data } = await api.DELETE("/api/lists/{id}", { params: { path: { id: listId } } });
+    const { error, data } = await api.DELETE("/lists/{id}", { params: { path: { id: listId } } });
 
     if (data) {
       toast({ title: "List deleted", description: "List successfully deleted." });

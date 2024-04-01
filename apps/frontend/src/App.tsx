@@ -19,7 +19,7 @@ const App = () => {
   const addListsToStore = store((state) => state.addLists);
 
   useEffect(() => {
-    api.GET("/api/lists").then(({ data, error }) => {
+    api.GET("/lists").then(({ data, error }) => {
       setLoading(!loading);
 
       if (data) return addListsToStore(data);

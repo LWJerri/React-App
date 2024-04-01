@@ -21,7 +21,7 @@ const TaskHistory = (props: { open: boolean; close: () => void; listId: string; 
     if (!open) return;
 
     api
-      .GET("/api/lists/{listId}/tasks/{id}/audit", { params: { path: { id: taskId, listId } } })
+      .GET("/lists/{listId}/tasks/{id}/audit", { params: { path: { id: taskId, listId } } })
       .then(({ data, error }) => {
         if (data) return setHistory(data);
 

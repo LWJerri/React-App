@@ -21,7 +21,7 @@ const History = (props: { open: boolean; close: () => void }) => {
   useEffect(() => {
     if (!open) return;
 
-    api.GET("/api/audit").then(({ data, error }) => {
+    api.GET("/audit").then(({ data, error }) => {
       setLoading(false);
 
       if (data) return setHistory(data);
