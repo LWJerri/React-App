@@ -1,0 +1,33 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "React ToDO Kanban PoC for Radency.",
+  "type": "module",
+  "scripts": {
+    "backend:build": "pnpm -F @task-manager/backend build",
+    "backend:start": "pnpm -F @task-manager/backend start",
+    "backend:dev": "pnpm -F @task-manager/backend dev",
+    "frontend:preview": "pnpm -F @task-manager/frontend preview",
+    "frontend:build": "pnpm -F @task-manager/frontend build",
+    "frontend:dev": "pnpm -F @task-manager/frontend dev",
+    "frontend:sync": "pnpm -F @task-manager/frontend sync"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LWJerri/React-App.git"
+  },
+  "keywords": [],
+  "author": "LWJerri (lwjerri.dev)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LWJerri/React-App/issues"
+  },
+  "homepage": "https://github.com/LWJerri/React-App#readme",
+  "devDependencies": {
+    "prettier": "3.2.5",
+    "prettier-plugin-tailwindcss": "0.5.13"
+  }
+}
