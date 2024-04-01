@@ -8,7 +8,7 @@ RUN corepack enable
 
 RUN pnpm i
 
-ENV VITE_API_URL="http://localhost:3000"
+ARG VITE_API_URL
 
 RUN VITE_API_URL=${VITE_API_URL} pnpm build
 
