@@ -19,17 +19,22 @@ services:
     environment:
       - PORT=${PORT}
       - DATABASE_URL=${DATABASE_URL}
+    networks:
+      - db
+      - caddy
     depends_on:
       - postgres
     labels:
       caddy: https://api.task-manager.main.lwjerri.dev
-      caddy.reverse_proxy: "{{upstreams ${PORT}}}"
+      caddy.reverse_proxy: "{{upstreams 3000}}"
 
   frontend:
     restart: always
     image: registry.main.lwjerri.dev/lwjerri/task-manager-frontend:latest
     environment:
       - API_URL=${API_URL}
+    networks:
+      - caddy
     depends_on:
       - backend
     labels:
