@@ -1,12 +1,6 @@
 version: "3.8"
 
 services:
-  adminer:
-    restart: always
-    image: adminer:latest
-    ports:
-      - 3000:8080
-
   postgres:
     restart: always
     image: postgres:14.5
@@ -21,10 +15,10 @@ services:
       context: ./
       dockerfile: ./apps/backend/Dockerfile
     environment:
-      PORT: "3005"
+      PORT: "3000"
       DATABASE_URL: "postgres://task_user:task_password@postgres/task_manager?schema=public"
     ports:
-      - 3005:3005
+      - 3000:3000
     depends_on:
       - postgres
 
@@ -34,8 +28,8 @@ services:
       context: ./
       dockerfile: ./apps/frontend/Dockerfile
     environment:
-      VITE_API_URL: "http://backend:3005"
+      VITE_API_URL: "http://localhost:3000"
     ports:
-      - 3006:8080
+      - 3005:8080
     depends_on:
       - backend
