@@ -99,6 +99,8 @@ jobs:
 
           curl -H "Authorization: token ${{ secrets.PIPELINE_TOKEN }}" -o docker-compose.yaml $FILE_URL
 
+          sed -i 's/$PORT/${{ secrets.PORT }}/g' docker-compose.yaml
+
       - name: Create new .env
         shell: bash
         run: |
@@ -110,7 +112,7 @@ jobs:
           POSTGRES_DB=${{ secrets.POSTGRES_DB }}
           PORT=${{ secrets.PORT }}
           DATABASE_URL=${{ secrets.DATABASE_URL }}
-          API_URL=${{ secrets.API_URL }}
+          VITE_API_URL=${{ secrets.VITE_API_URL }}
           EOF
 
       - name: Run new Docker containers
