@@ -69,6 +69,8 @@ jobs:
           file: ${{ steps.changes.outputs.path }}/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/task-manager-${{ matrix.service }}:latest
+          build-args: |
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
 
   cd-job:
     runs-on: self-hosted
@@ -112,7 +114,6 @@ jobs:
           POSTGRES_DB=${{ secrets.POSTGRES_DB }}
           PORT=${{ secrets.PORT }}
           DATABASE_URL=${{ secrets.DATABASE_URL }}
-          VITE_API_URL=${{ secrets.VITE_API_URL }}
           EOF
 
       - name: Run new Docker containers
