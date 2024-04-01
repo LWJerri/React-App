@@ -50,7 +50,7 @@ const EditTask = (props: { open: boolean; close: () => void; listId: string; tas
     const { dueAt, ...restData } = data;
     const preparedDueAt = dueAt ? new Date(dueAt).toISOString() : undefined;
 
-    const request = await api.PATCH("/api/lists/{listId}/tasks/{id}", {
+    const request = await api.PATCH("/lists/{listId}/tasks/{id}", {
       body: { ...restData, dueAt: preparedDueAt },
       params: { path: { listId, id: taskId } },
     });

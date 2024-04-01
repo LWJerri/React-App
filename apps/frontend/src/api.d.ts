@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-  "/api/lists": {
+  "/lists": {
     /**
      * Get all lists
      * @description This endpoint returns a list of all created lists.
@@ -16,7 +16,7 @@ export interface paths {
      */
     post: operations["ListController_createList"];
   };
-  "/api/lists/{id}": {
+  "/lists/{id}": {
     /**
      * Delete list
      * @description This endpoint deletes the list with all tasks bound to the list.
@@ -28,7 +28,7 @@ export interface paths {
      */
     patch: operations["ListController_patchList"];
   };
-  "/api/lists/{listId}/tasks": {
+  "/lists/{listId}/tasks": {
     /**
      * Get the tasks
      * @description This endpoint will return a list of all created tasks for the specified list.
@@ -40,14 +40,14 @@ export interface paths {
      */
     post: operations["TaskController_createTask"];
   };
-  "/api/lists/{listId}/tasks/{id}/audit": {
+  "/lists/{listId}/tasks/{id}/audit": {
     /**
      * History of changes
      * @description This endpoint will return a list of all changes that are associated with the specified task.
      */
     get: operations["TaskController_getAudit"];
   };
-  "/api/lists/{listId}/tasks/{id}": {
+  "/lists/{listId}/tasks/{id}": {
     /**
      * Get the task
      * @description This endpoint will return an object with detailed information about a specific task.
@@ -64,7 +64,7 @@ export interface paths {
      */
     patch: operations["TaskController_patchTask"];
   };
-  "/api/audit": {
+  "/audit": {
     /**
      * Global audit log
      * @description This request will return the entire history of actions on lists and tasks.
@@ -91,13 +91,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-04-01T00:58:34.081Z
+       * @example 2024-04-01T23:52:31.361Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-04-01T00:58:34.082Z
+       * @example 2024-04-01T23:52:31.362Z
        */
       updatedAt: string;
       /**
@@ -141,13 +141,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-04-01T00:58:34.081Z
+       * @example 2024-04-01T23:52:31.361Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-04-01T00:58:34.082Z
+       * @example 2024-04-01T23:52:31.362Z
        */
       updatedAt: string;
     };
@@ -172,13 +172,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the list was created.
-       * @example 2024-04-01T00:58:34.081Z
+       * @example 2024-04-01T23:52:31.361Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the list was updated.
-       * @example 2024-04-01T00:58:34.082Z
+       * @example 2024-04-01T23:52:31.362Z
        */
       updatedAt: string;
       /**
@@ -206,7 +206,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The time by which the task must be completed.
-       * @example 2024-04-01T00:58:34.082Z
+       * @example 2024-04-01T23:52:31.362Z
        */
       dueAt: string;
       /**
@@ -218,13 +218,13 @@ export interface components {
       /**
        * Format: date-time
        * @description Date the task was created.
-       * @example 2024-04-01T00:58:34.082Z
+       * @example 2024-04-01T23:52:31.362Z
        */
       createdAt: string;
       /**
        * Format: date-time
        * @description Date the task was updated.
-       * @example 2024-04-01T00:58:34.083Z
+       * @example 2024-04-01T23:52:31.362Z
        */
       updatedAt: string;
       /**
@@ -254,7 +254,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-04-01T00:58:34.083Z
+       * @example 2024-04-01T23:52:31.363Z
        */
       createdAt: string;
       /** @description The new state of the object. */
@@ -275,7 +275,7 @@ export interface components {
       description: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-04-01T00:58:34.199Z
+       * @example 2024-04-01T23:52:31.465Z
        */
       dueAt: string;
       /**
@@ -298,7 +298,7 @@ export interface components {
       description?: string;
       /**
        * @description The time by which the task must be completed.
-       * @example 2024-04-01T00:58:34.199Z
+       * @example 2024-04-01T23:52:31.465Z
        */
       dueAt?: string;
       /**
@@ -334,7 +334,7 @@ export interface components {
       /**
        * Format: date-time
        * @description The date on which the action was performed.
-       * @example 2024-04-01T00:58:34.083Z
+       * @example 2024-04-01T23:52:31.363Z
        */
       createdAt: string;
       /** @description The new state of the object. */

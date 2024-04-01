@@ -23,7 +23,7 @@ const TaskDropdown = (props: { task: Task }) => {
   const removeTask = store((state) => state.removeTask);
 
   async function deleteTask() {
-    const { error, data } = await api.DELETE("/api/lists/{listId}/tasks/{id}", {
+    const { error, data } = await api.DELETE("/lists/{listId}/tasks/{id}", {
       params: { path: { listId: task.listId, id: task.id } },
     });
 
