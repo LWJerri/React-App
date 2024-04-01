@@ -12,8 +12,9 @@ React ToDO Kanban PoC for Radency.
 
 1. Install dependencies - `pnpm i -r` (or use your prefer package manager).
 2. Rename `.env.example` to `.env` & fill all environments in `apps/backend`/`apps/frontend` folders.
-3. Run `pnpm backend:build && pnpm backend:start` to start backend.
-4. Run `pnpm frontend:build && pnpm frontend:preview` to run frontend in preview mode.
+3. Run `pnpm -r build`.
+4. Run `pnpm backend:start` to start backend.
+5. Run `pnpm frontend:preview` to run frontend in preview mode.
 
 ### With Docker
 
