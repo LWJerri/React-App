@@ -102,6 +102,8 @@ const History = (props: { open: boolean; close: () => void }) => {
                 </div>
               </div>
             ))}
+
+          {!loading && !history.length && <p>No history... Try to do something...</p>}
         </div>
       </SheetContent>
     </Sheet>
