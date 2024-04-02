@@ -27,8 +27,8 @@ services:
     build:
       context: ./
       dockerfile: ./apps/frontend/Dockerfile
-    environment:
-      VITE_API_URL: "http://localhost:3000"
+      args:
+        VITE_API_URL: "http://localhost:3000"
     ports:
       - 3005:8080
     depends_on:
