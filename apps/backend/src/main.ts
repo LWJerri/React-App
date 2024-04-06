@@ -11,7 +11,11 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.useLogger(app.get(Logger));
-  app.enableCors();
+  app.enableCors({
+    allowedHeaders: "*",
+    origin: "*",
+    credentials: true,
+  });
 
   const logger = app.get(Logger);
 
