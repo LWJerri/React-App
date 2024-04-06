@@ -19,6 +19,7 @@ export class AuditService {
         newState: true,
         oldState: true,
       },
+      take: 5000,
     });
 
     const response: ResponseAuditDto[] = retrieveAuditLog.map((log) => ({
