@@ -12,7 +12,11 @@ export class TaskService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getTasks(listId: string): Promise<ResponseTaskDto[]> {
-    const tasks = await this.prismaService.task.findMany({ where: { listId }, orderBy: { createdAt: "desc" } });
+    const tasks = await this.prismaService.task.findMany({
+      where: { listId },
+      orderBy: { createdAt: "desc" },
+      take: 5000,
+    });
 
     return tasks;
   }
@@ -29,6 +33,7 @@ export class TaskService {
         newState: true,
         oldState: true,
       },
+      take: 5000,
     });
 
     const response: ResponseAuditTaskDto[] = retrieveAuditLog.map((log) => ({

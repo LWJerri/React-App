@@ -15,6 +15,7 @@ export class ListService {
     const retrieveLists = await this.prismaService.list.findMany({
       orderBy: { createdAt: "desc" },
       include: { _count: true },
+      take: 100,
     });
 
     const lists = retrieveLists.map((list) => {
