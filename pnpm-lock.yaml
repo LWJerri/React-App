@@ -133,8 +133,8 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       openapi-fetch:
-        specifier: 0.9.3
-        version: 0.9.3
+        specifier: 0.9.4
+        version: 0.9.4
       openapi-typescript:
         specifier: 6.7.5
         version: 6.7.5
@@ -4696,14 +4696,14 @@ packages:
       mimic-fn: 2.1.0
     dev: true
 
-  /openapi-fetch@0.9.3:
-    resolution: {integrity: sha512-tC1NDn71vJHeCzu+lYdrnIpgRt4GxR0B4eSwXNb15ypWpZcpaEOwHFkoz8FcfG5Fvqkz2P0Fl9zQF1JJwBjuvA==}
+  /openapi-fetch@0.9.4:
+    resolution: {integrity: sha512-Bmn1PFEKdwgkBk51hNXJotfDs1ESxyhgJU5nh55zMbMdN+hYIREtWwoPQN21oNrJfRLnD9CjK0Eg11CM91uUqg==}
     dependencies:
-      openapi-typescript-helpers: 0.0.7
+      openapi-typescript-helpers: 0.0.8
     dev: false
 
-  /openapi-typescript-helpers@0.0.7:
-    resolution: {integrity: sha512-7nwlAtdA1fULipibFRBWE/rnF114q6ejRYzNvhdA/x+qTWAZhXGLc/368dlwMlyJDvCQMCnADjpzb5BS5ZmNSA==}
+  /openapi-typescript-helpers@0.0.8:
+    resolution: {integrity: sha512-1eNjQtbfNi5Z/kFhagDIaIRj6qqDzhjNJKz8cmMW0CVdGwT6e1GLbAfgI0d28VTJa1A8jz82jm/4dG8qNoNS8g==}
     dev: false
 
   /openapi-typescript@6.7.5:
