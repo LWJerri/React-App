@@ -1,12 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Task } from "@/types/Task";
 import { IconCalendarDue, IconTimelineEventPlus } from "@tabler/icons-react";
@@ -23,13 +16,12 @@ const TaskModalView = (props: { open: boolean; close: () => void; task: Task }) 
       <DialogContent className="max-h-full">
         <DialogHeader>
           <DialogTitle>{task.name}</DialogTitle>
-          <DialogDescription></DialogDescription>
         </DialogHeader>
 
         <Markdown
           rehypePlugins={[rehypeHighlight]}
           remarkPlugins={[remarkGfm]}
-          className="small max-h-full min-h-96 overflow-y-auto font-normal"
+          className="small max-h-full min-h-96 overflow-y-auto break-all font-normal"
         >
           {task.description}
         </Markdown>
